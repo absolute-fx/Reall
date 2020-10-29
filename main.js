@@ -55,4 +55,8 @@ promiseIpc.on('getAppVersion', (_)=>{
     return  app.getVersion();
 })
 
+promiseIpc.on('getUserDataPath', (_)=>{
+    return  app.getPath('userData');
+})
+
 app.whenReady().then(createWindow);

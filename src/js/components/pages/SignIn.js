@@ -2,14 +2,16 @@ import React, {useContext, useState, useEffect} from "react";
 import axios from "axios";
 import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
+import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {useHistory} from "react-router-dom";
 //import {electron} from "webpack";
 
 const SignIn = (props) => {
 
+    const {appParams, setAppParams} = useContext(AppParamsContext)
     const{ user, setUser} = useContext(UserContext);
     const{ footerLoader, setFooterLoader} = useContext(FooterLoaderContext);
-    let history = useHistory();
+    const history = useHistory();
 
     const [isLoading, setLoading] = useState(false);
 
@@ -26,27 +28,31 @@ const SignIn = (props) => {
         }
     }
 
+    const savePrams = async () =>{
+        await electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
+    }
+
     useEffect(()=>{
-        if(props.appParams){
-            setUserName(props.appParams.user.login);
+        if(appParams){
+            setUserName(appParams.user.login);
         }
-    }, [props.appParams])
+    }, [appParams])
 
     const onSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
         setFooterLoader({active: true, message: 'Connecting to API...'})
+        //electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
         axios.post('https://imoges-api.herokuapp.com/api/auth/signin', JSON.stringify({username: username, password: password}), { headers: { 'Content-Type': 'application/json'}})
             .then(function (response) {
-                // handle success
                 let contextUser = response.data.user;
                 contextUser.accessToken = response.data.accessToken;
-                setUser(contextUser);
-                setFooterLoader({active: false, message: ''});
-                history.push("/");
-                async function setFile(){
-                    await electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
-                }
+                // handle success...
+                savePrams().then(() => {
+                    setUser(contextUser);
+                    setFooterLoader({active: false, message: ''});
+                    history.push("/");
+                });
             })
             .catch(function (error) {
                 console.log(error.response);

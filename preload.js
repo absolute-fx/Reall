@@ -14,7 +14,11 @@ contextBridge.exposeInMainWorld('electron', {
             return __dirname;
         },
         getConfigDir(){
-            return "...";
+            return new Promise((resolve, reject) => {
+                promiseIpc.send('getUserDataPath').then(data =>{
+                    resolve(data);
+                });
+            });
         }
     },
     appDataApi:{
@@ -23,22 +27,28 @@ contextBridge.exposeInMainWorld('electron', {
             return new Promise((resolve, reject) => {
                 promiseIpc.send('getAppVersion').then(data =>{
                     resolve(data);
-                })
+                });
             });
         }
     },
     parametersApi:{
         getAppParameters(){
             return new Promise ((resolve, reject)=>{
-                ManageParameters.getParameters().then(parameters =>{
-                    resolve(parameters);
+                promiseIpc.send('getUserDataPath').then(userDataPath =>{
+                    ManageParameters.getParameters(userDataPath).then(parameters =>{
+                        resolve(parameters);
+                    });
                 });
             });
         },
         setAppParams(params){
             return new Promise ((resolve, reject)=>{
-                ManageParameters.setParameters(params).then(parameters =>{
-                    resolve(parameters);
+                let userDataPath;
+                promiseIpc.send('getUserDataPath').then(data =>{
+                    userDataPath = data;
+                    ManageParameters.setParameters(userDataPath ,params).then(parameters =>{
+                        resolve(parameters);
+                    });
                 });
             });
         }

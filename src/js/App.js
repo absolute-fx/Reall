@@ -31,42 +31,43 @@ function App(){
     const getParams = async () => {
         setAppParams( await electron.parametersApi.getAppParameters());
     }
-
-    useEffect(()=>{
-        getParams();
-        getAppVersion();
-    }, []);
+    const appParamsProvider = useMemo(() => ({appParams, setAppParams}), [appParams, setAppParams]);
 
     const [user, setUser] = useState(null);
     const userDataProvider = useMemo(() => ({user, setUser}), [user, setUser]);
     const [footerLoader, setFooterLoader] = useState({active: false, message: ""});
     const footerLoaderProvider = useMemo(() => ({footerLoader, setFooterLoader}), [footerLoader, setFooterLoader]);
 
+    useEffect(()=>{
+        getParams();
+        getAppVersion();
+    }, []);
+
     return(
         <Router>
-            <UserContext.Provider value={userDataProvider}>
-                <FooterLoaderContext.Provider value={footerLoaderProvider}>
-                    <Navigation />
-                    <main className= {`content ${user ? 'padding-content': ''}`}>
-                        <Switch>
-                            <Route path="/login" exact>
-                                <SignIn appParams={appParams}/>
-                            </Route>
-                            <Route path="/" exact component={Dashboard} />
-                            <Route path="/park" exact component={Park} />
-                            <Route path="/libraries" exact component={Libraries} />
-                            <Route path="/clients" exact component={Clients} />
-                            <Route path="/accounting" exact component={Accounting} />
-                            <Route path="/support" exact component={Support} />
-                            <Route path="/parameters" exact component={Parameters} />
-                            <Route path="/users" exact component={Users} />
-                            <Route path="/services" exact component={Services} />
-                            <Route path="/help" exact component={Help} />
-                        </Switch>
-                        <Footer appVersion={appVersion} />
-                    </main>
-                </FooterLoaderContext.Provider>
-            </UserContext.Provider>
+            <AppParamsContext.Provider value={appParamsProvider}>
+                <UserContext.Provider value={userDataProvider}>
+                    <FooterLoaderContext.Provider value={footerLoaderProvider}>
+                        <Navigation />
+                        <main className= {`content ${user ? 'padding-content': ''}`}>
+                            <Switch>
+                                <Route path="/login" exact component={SignIn} />
+                                <Route path="/" exact component={Dashboard} />
+                                <Route path="/park" exact component={Park} />
+                                <Route path="/libraries" exact component={Libraries} />
+                                <Route path="/clients" exact component={Clients} />
+                                <Route path="/accounting" exact component={Accounting} />
+                                <Route path="/support" exact component={Support} />
+                                <Route path="/parameters" exact component={Parameters} />
+                                <Route path="/users" exact component={Users} />
+                                <Route path="/services" exact component={Services} />
+                                <Route path="/help" exact component={Help} />
+                            </Switch>
+                            <Footer appVersion={appVersion} />
+                        </main>
+                    </FooterLoaderContext.Provider>
+                </UserContext.Provider>
+            </AppParamsContext.Provider>
         </Router>
     )
 }

@@ -2,13 +2,13 @@ const fs = require('fs');
 const editJsonFile = require("edit-json-file");
 
 class ManageParameters{
-    static getParameters()
+    static getParameters(userDataPath)
     {
         return new Promise (function(resolve, reject){
             let appParameters;
-            if (!fs.existsSync(__dirname + '/../parameters.json')){
+            if (!fs.existsSync(userDataPath + '/parameters.json')){
                 appParameters = ManageParameters.getDefaultParams();
-                fs.writeFile(__dirname + '/../parameters.json', JSON.stringify(appParameters), 'utf8', (err) =>{
+                fs.writeFile(userDataPath + '/parameters.json', JSON.stringify(appParameters), 'utf8', (err) =>{
                     if(!err)
                     {
                         resolve(appParameters);
@@ -22,7 +22,7 @@ class ManageParameters{
             }
             else
             {
-                fs.readFile(__dirname + '/../parameters.json', 'utf8', (err, data) =>{
+                fs.readFile(userDataPath + '/parameters.json', 'utf8', (err, data) =>{
                     if (err){
                         reject(err);
                     } else {
@@ -35,9 +35,9 @@ class ManageParameters{
         });
     }
 
-    static setParameters(params){
+    static setParameters(path, params){
         return new Promise (function(resolve, reject) {
-            let file = editJsonFile(__dirname + '/../parameters.json');
+            let file = editJsonFile(path + '/parameters.json');
             for (let i in params)
             {
                 file.set(params[i].node, params[i].value);
@@ -48,10 +48,10 @@ class ManageParameters{
         });
     }
 
-    static setMultipleParameters(params)
+    static setMultipleParameters(path, params)
     {
         return new Promise (function(resolve, reject) {
-            fs.writeFileSync(__dirname + '/../parameters.json', JSON.stringify(params));
+            fs.writeFileSync(path + '/parameters.json', JSON.stringify(params));
             resolve(params);
         });
     }

@@ -1,2 +1,2 @@
-import {createContext} from 'react'
+import {createContext} from 'react';
 export const AppParamsContext = createContext(null);
