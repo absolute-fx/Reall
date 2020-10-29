@@ -16,7 +16,7 @@ const SignIn = (props) => {
     const [isLoading, setLoading] = useState(false);
 
     const [username, setUserName] = useState('');
-    const [password, setUserPassword] = useState('manux88');
+    const [password, setUserPassword] = useState('');
 
     const onChange = (e) =>{
         switch (e.target.name){
