@@ -17,6 +17,7 @@ const SignIn = (props) => {
 
     const [username, setUserName] = useState('');
     const [password, setUserPassword] = useState('');
+    const [autoConnect, setAutoConnect] = useState(false);
 
     const onChange = (e) =>{
         switch (e.target.name){
@@ -25,10 +26,14 @@ const SignIn = (props) => {
                 break;
             case 'password':
                 setUserPassword(e.target.value);
+                break;
+            case 'autoconnect':
+
+                break;
         }
     }
 
-    const savePrams = async () =>{
+    const saveParams = async () =>{
         await electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
     }
 
@@ -48,7 +53,7 @@ const SignIn = (props) => {
                 let contextUser = response.data.user;
                 contextUser.accessToken = response.data.accessToken;
                 // handle success...
-                savePrams().then(() => {
+                saveParams().then(() => {
                     setUser(contextUser);
                     setFooterLoader({active: false, message: ''});
                     history.push("/");
@@ -102,8 +107,8 @@ const SignIn = (props) => {
                     <div className="row">
                         <div className="col mt-3">
                             <div id="dark-mode-switch" className="custom-control custom-switch">
-                                <input type="checkbox" className="custom-control-input" id="darkModeSwitch"/>
-                                <label className="custom-control-label" htmlFor="darkModeSwitch">Auto connect</label>
+                                <input name="autoconnect" type="checkbox" className="custom-control-input" id="autoConnectSwitch"/>
+                                <label className="custom-control-label" htmlFor="autoConnectSwitch">Auto connect</label>
                             </div>
                         </div>
                     </div>

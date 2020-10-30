@@ -80,6 +80,14 @@ html, body {
   user-select: none;
 }
 
+.brand-font{
+  font-family: "brand-font";
+}
+
+.brand-color{
+  color: color(brand-color);
+}
+
 .dark-mode{
   filter: invert(100%);
 }
@@ -410,6 +418,7 @@ a[aria-expanded="true"]:hover{
 
 .sign-in-panel{
   min-width: 600px;
+  max-width: 600px;
 }
 
 .sign-in-logo{

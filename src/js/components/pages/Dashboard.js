@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from '../../contexts/FooterLoaderContext';
 
@@ -8,7 +8,7 @@ const Dashboard = (props) => {
     const{ user, setUser} = useContext(UserContext);
     const{ footerLoader, setFooterLoader} = useContext(FooterLoaderContext);
     let history = useHistory();
-    if (!user) history.push("/login");
+    if (!user) history.push("/licence");
     //console.log(user);
     //console.log(footerLoader);
 

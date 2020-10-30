@@ -77,7 +77,9 @@ class ManageParameters{
             },
             user:{
                 login: '',
-                password: ''
+                password: '',
+                auto_connect: false,
+                licence_key: ''
             },
             project: {
                 project_phases: [],
