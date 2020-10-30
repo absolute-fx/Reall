@@ -18,6 +18,7 @@ const SignIn = (props) => {
     const [username, setUserName] = useState('');
     const [password, setUserPassword] = useState('');
     const [autoConnect, setAutoConnect] = useState(false);
+    const [alert, setAlert] = useState({visibility: false, message: 'default'})
 
     const onChange = (e) =>{
         switch (e.target.name){
@@ -45,28 +46,32 @@ const SignIn = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
-        setFooterLoader({active: true, message: 'Connecting to API...'})
-        //electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
-        axios.post('https://imoges-api.herokuapp.com/api/auth/signin', JSON.stringify({username: username, password: password}), { headers: { 'Content-Type': 'application/json'}})
-            .then(function (response) {
-                let contextUser = response.data.user;
-                contextUser.accessToken = response.data.accessToken;
-                // handle success...
-                saveParams().then(() => {
-                    setUser(contextUser);
+        if(username && password){
+            setLoading(true);
+            setFooterLoader({active: true, message: 'Connecting to API...'})
+            //electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
+            axios.post('https://imoges-api.herokuapp.com/api/auth/signin', JSON.stringify({username: username, password: password}), { headers: { 'Content-Type': 'application/json'}})
+                .then(function (response) {
+                    let contextUser = response.data.user;
+                    contextUser.accessToken = response.data.accessToken;
+                    // handle success...
+                    saveParams().then(() => {
+                        setUser(contextUser);
+                        setFooterLoader({active: false, message: ''});
+                        setAlert({visibility: false, message: ""})
+                        history.push("/");
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                    setLoading(false);
                     setFooterLoader({active: false, message: ''});
-                    history.push("/");
+                    setAlert({visibility: true, message: error.response.data.reason});
+                })
+                .then(function () {
+                    // always executed
                 });
-            })
-            .catch(function (error) {
-                console.log(error.response);
-                setLoading(false);
-                setFooterLoader({active: false, message: ''});
-            })
-            .then(function () {
-                // always executed
-            });
+        }
     }
 
 
@@ -101,6 +106,13 @@ const SignIn = (props) => {
                             </div>
                             <div className="col-md-3">
                                 <button disabled={isLoading} type="submit" className="btn btn-primary connect-btn">CONNECT</button>
+                            </div>
+                        </div>
+                        <div className={ alert.visibility ? 'row mt-3' : 'row mt-3 d-none'}>
+                            <div className="col">
+                                <div className="alert alert-danger mb-0" role="alert">
+                                    <i className="fas fa-exclamation-triangle"/> {alert.message}
+                                </div>
                             </div>
                         </div>
                     </form>
