@@ -4,7 +4,7 @@ import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
-import {useHistory} from "react-router-dom";;
+import {useHistory} from "react-router-dom";
 
 const SignIn = (props) => {
 
@@ -29,9 +29,6 @@ const SignIn = (props) => {
             case 'password':
                 setUserPassword(e.target.value);
                 break;
-            case 'autoconnect':
-
-                break;
         }
     }
 
@@ -45,7 +42,7 @@ const SignIn = (props) => {
     }
 
     useEffect(()=>{
-        console.log(autoConnect)
+        //console.log(autoConnect)
     }, [autoConnect])
 
     useEffect(()=>{
@@ -115,7 +112,7 @@ const SignIn = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-3">
-                                <button disabled={isLoading} type="submit" className="btn btn-primary connect-btn">CONNECT</button>
+                                <button disabled={isLoading} type="submit" className="btn btn-primary connect-btn">SIGN IN</button>
                             </div>
                         </div>
                         <div className={ alert.visibility ? 'row mt-3' : 'row mt-3 d-none'}>

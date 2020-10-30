@@ -15,6 +15,7 @@ import Parameters from './components/pages/Parameters';
 import Users from './components/pages/Users';
 import Services from './components/pages/Services';
 import Help from './components/pages/Help';
+import Disconnect from "./components/pages/Diconnect";
 // contexts
 import {UserContext} from './contexts/UserContext';
 import {FooterLoaderContext} from './contexts/FooterLoaderContext';
@@ -71,6 +72,7 @@ function App(){
                                     <Route path="/users" exact component={Users} />
                                     <Route path="/services" exact component={Services} />
                                     <Route path="/help" exact component={Help} />
+                                    <Route path="/signout" exact component={Disconnect} />
                                 </Switch>
                                 <Footer appVersion={appVersion} />
                             </main>

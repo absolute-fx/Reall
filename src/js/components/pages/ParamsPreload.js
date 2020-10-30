@@ -62,8 +62,12 @@ const ParamsPreload = () => {
                     history.push("/login");
                 }
             }else{
+                setFooterLoader({active: false, message: ''})
                 history.push("/licence");
             }
+        }else{
+            setFooterLoader({active: false, message: ''})
+            history.push("/login");
         }
     }, [appParams])
 
