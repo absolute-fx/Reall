@@ -3,14 +3,15 @@ import axios from "axios";
 import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
-import {useHistory} from "react-router-dom";
-//import {electron} from "webpack";
+import {LicenceContext} from "../../contexts/LicenceContext";
+import {useHistory} from "react-router-dom";;
 
 const SignIn = (props) => {
 
     const {appParams, setAppParams} = useContext(AppParamsContext)
     const{ user, setUser} = useContext(UserContext);
     const{ footerLoader, setFooterLoader} = useContext(FooterLoaderContext);
+    const {licence, setLicence} = useContext(LicenceContext);
     const history = useHistory();
 
     const [isLoading, setLoading] = useState(false);
@@ -34,9 +35,18 @@ const SignIn = (props) => {
         }
     }
 
-    const saveParams = async () =>{
-        await electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
+    const autoConnectChange = (e) => {
+        setAutoConnect(!autoConnect);
     }
+
+    const saveParams = async () =>{
+        const pass = autoConnect ? password: "";
+        await electron.parametersApi.setAppParams([{node: "user.password", value: pass}, {node: "user.login", value:username},{node: "user.auto_connect", value: autoConnect}]);
+    }
+
+    useEffect(()=>{
+        console.log(autoConnect)
+    }, [autoConnect])
 
     useEffect(()=>{
         if(appParams){
@@ -49,8 +59,8 @@ const SignIn = (props) => {
         if(username && password){
             setLoading(true);
             setFooterLoader({active: true, message: 'Connecting to API...'})
-            //electron.parametersApi.setAppParams([{node: "user.login", value:username}]);
-            axios.post('https://imoges-api.herokuapp.com/api/auth/signin', JSON.stringify({username: username, password: password}), { headers: { 'Content-Type': 'application/json'}})
+            const apiLink = licence.api_link + 'auth/signin';
+            axios.post(apiLink, JSON.stringify({username: username, password: password}), { headers: { 'Content-Type': 'application/json'}})
                 .then(function (response) {
                     let contextUser = response.data.user;
                     contextUser.accessToken = response.data.accessToken;
@@ -111,7 +121,7 @@ const SignIn = (props) => {
                         <div className={ alert.visibility ? 'row mt-3' : 'row mt-3 d-none'}>
                             <div className="col">
                                 <div className="alert alert-danger mb-0" role="alert">
-                                    <i className="fas fa-exclamation-triangle"/> {alert.message}
+                                    <i className="fas fa-exclamation-triangle mr-3"/> {alert.message}
                                 </div>
                             </div>
                         </div>
@@ -119,7 +129,7 @@ const SignIn = (props) => {
                     <div className="row">
                         <div className="col mt-3">
                             <div id="dark-mode-switch" className="custom-control custom-switch">
-                                <input name="autoconnect" type="checkbox" className="custom-control-input" id="autoConnectSwitch"/>
+                                <input name="autoconnect" type="checkbox" onChange={autoConnectChange} className="custom-control-input" id="autoConnectSwitch"/>
                                 <label className="custom-control-label" htmlFor="autoConnectSwitch">Auto connect</label>
                             </div>
                         </div>

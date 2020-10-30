@@ -22,7 +22,7 @@ function createWindow(){
     win.loadFile('index.html');
     win.removeMenu();
     if(isDev) {
-        win.webContents.openDevTools();
+        //win.webContents.openDevTools();
     }
 
     //console.log(app.getVersion());
