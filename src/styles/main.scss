@@ -222,6 +222,10 @@ a:hover{
   text-decoration: none!important;
   box-shadow: $form-btn-shadows !important;
   text-transform: uppercase;
+  i{
+    margin-right: 0rem;
+    transition: margin $button-hover-speed;
+  }
 }
 
 #sidebar.active ul li a {
@@ -236,7 +240,7 @@ a:hover{
   font-size: 1.8em;
   margin-right: 0;
   margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-top: 1rem
 }
 
 #sidebar.active ul li a span{
@@ -265,7 +269,7 @@ a:hover{
 #sidebar ul li a {
   text-shadow: $text-shadow !important;
   padding: 5px 10px;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   display: block;
   border-radius: .5rem;
 }
@@ -279,6 +283,8 @@ a:hover{
   background: color(background-dark);
   box-shadow: none!important;
   i{
+    transition: margin $button-hover-speed;
+    margin-right: 1rem;
     color: map-get($theme-colors, primary)!important;
   }
 }
@@ -293,11 +299,16 @@ a:hover{
   box-shadow: none!important;
   background: color(background-dark);
   font-weight: bold;
+  i{
+    transition: none;
+  }
 }
 
 #sidebar ul li a.active:hover{
   color: color(brand-color)!important;
   i{
+    transition: none;
+    margin-right: 10px;
     color: color(brand-color)!important;
   }
 }

@@ -6,7 +6,7 @@ import LicenceCheck from "./components/pages/LicenceCheck";
 import ParamsPreload from "./components/pages/ParamsPreload";
 import SignIn from "./components/pages/SignIn";
 import Dashboard from './components/pages/Dashboard';
-import Park from './components/pages/Park';
+import Projects from './components/pages/Projects';
 import Libraries from './components/pages/Libraries';
 import Clients from './components/pages/Clients';
 import Accounting from './components/pages/Accounting';
@@ -63,7 +63,7 @@ function App(){
                                     <Route path="/params" exact component={ParamsPreload} />
                                     <Route path="/login" exact component={SignIn} />
                                     <Route path="/" exact component={Dashboard} />
-                                    <Route path="/park" exact component={Park} />
+                                    <Route path="/projects" exact component={Projects} />
                                     <Route path="/libraries" exact component={Libraries} />
                                     <Route path="/clients" exact component={Clients} />
                                     <Route path="/accounting" exact component={Accounting} />
