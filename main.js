@@ -2,6 +2,8 @@ const {app, BrowserWindow, ipcMain, Notification} = require("electron");
 const path = require('path');
 const  promiseIpc =  require('electron-promise-ipc');
 const isDev = !app.isPackaged;
+const RCkMenu = require("electron").Menu;
+const RCMenuItems = require("electron").MenuItem;
 
 let win;
 
@@ -21,23 +23,33 @@ function createWindow(){
     })
     win.loadFile('index.html');
     win.removeMenu();
+
+
+    const ctxMenu = new RCkMenu();
+    ctxMenu.append(new RCMenuItems(
+        {
+        label: 'Add project',
+        click: () => {
+            console.log('hello world')
+        }
+    }));
+    ctxMenu.append(new RCMenuItems(
+        {
+            label: 'Add realty',
+            click: () => {
+                console.log('hello world II')
+            }
+        }));
+
+    win.webContents.on('context-menu', (e, params) => {
+        ctxMenu.popup(win, params.x, params.y)
+    });
+
     if(isDev) {
         //win.webContents.openDevTools();
     }
 
-    //console.log(app.getVersion());
 
-    /*
-    // Marche pas :(
-    const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
-
-    installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
-        console.log(`Added Extension:  ${name}`);
-    }).catch((err) => {
-            console.log('An error occurred: ', err);
-        });
-     */
-    //console.log("URL: " + win.webContents.getURL());
 }
 if(isDev){
     require('electron-reload')(__dirname, {

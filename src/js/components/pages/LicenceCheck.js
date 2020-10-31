@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
+import {useTranslation} from "react-multi-lang";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
@@ -57,6 +58,8 @@ const LicenceCheck = () => {
         }
     }, [appParams])
 
+    const t = useTranslation();
+
     return(
         <>
             <div className="sign-in-logo">reall<small className="text-primary">©</small></div>
@@ -64,7 +67,9 @@ const LicenceCheck = () => {
                 <div className="panel sign-in-panel">
                     <div className="row">
                         <div className="col mb-3">
-                            <p className="text-center">Veuillez introduire votre clé de licence <span className="brand-font brand-color">reallEngine©</span></p>
+                            <p className="text-center">
+                                {t('licence_check.insert_key_message_a')} <span className="brand-font brand-color">reallEngine©</span> {t('licence_check.insert_key_message_b')}
+                            </p>
                         </div>
                     </div>
                     <form onSubmit={onSubmit}>
@@ -74,7 +79,7 @@ const LicenceCheck = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="LICENCE KEY"
+                                        placeholder={t('licence_check.licence_key')}
                                         value={licenceKey}
                                         name="licencekey"
                                         onChange={onChange}
@@ -85,7 +90,7 @@ const LicenceCheck = () => {
                                 </div>
                             </div>
                             <div className="col-md-3">
-                                <button disabled={isLoading} type="submit" className="btn btn-sm btn-primary connect-btn">SAVE</button>
+                                <button disabled={isLoading} type="submit" className="btn btn-sm btn-primary connect-btn">{t('licence_check.save')}</button>
                             </div>
                         </div>
                     </form>

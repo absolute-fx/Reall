@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from "react";
+import {useTranslation} from "react-multi-lang";
 import axios from "axios";
 import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
@@ -81,6 +82,7 @@ const SignIn = (props) => {
         }
     }
 
+    const t = useTranslation();
 
     return (
         <>
@@ -94,7 +96,7 @@ const SignIn = (props) => {
                                     <input
                                         type="email"
                                         className="form-control"
-                                        placeholder="LOGIN"
+                                        placeholder={t('sign_in.login')}
                                         value={username}
                                         name="username"
                                         onChange={onChange}
@@ -104,7 +106,7 @@ const SignIn = (props) => {
                                     <input
                                         type="password"
                                         className="form-control"
-                                        placeholder="PASSWORD"
+                                        placeholder={t('sign_in.password')}
                                         value={password}
                                         name="password"
                                         onChange={onChange}
@@ -112,7 +114,7 @@ const SignIn = (props) => {
                                 </div>
                             </div>
                             <div className="col-md-3">
-                                <button disabled={isLoading} type="submit" className="btn btn-primary connect-btn">SIGN IN</button>
+                                <button disabled={isLoading} type="submit" className="btn btn-primary connect-btn">{t('sign_in.button')}</button>
                             </div>
                         </div>
                         <div className={ alert.visibility ? 'row mt-3' : 'row mt-3 d-none'}>
@@ -127,13 +129,13 @@ const SignIn = (props) => {
                         <div className="col mt-3">
                             <div id="dark-mode-switch" className="custom-control custom-switch">
                                 <input name="autoconnect" type="checkbox" onChange={autoConnectChange} className="custom-control-input" id="autoConnectSwitch"/>
-                                <label className="custom-control-label" htmlFor="autoConnectSwitch">Auto connect</label>
+                                <label className="custom-control-label" htmlFor="autoConnectSwitch">{t('sign_in.auto_connect')}</label>
                             </div>
                         </div>
                     </div>
                     <div className="row mt-4">
                         <div className="col">
-                            <a href="https://imoges.be/auth/forgottenpass">Forgotten password?</a>
+                            <a href="https://imoges.be/auth/forgottenpass">{t('sign_in.forgotten')}?</a>
                         </div>
                     </div>
                     <footer>

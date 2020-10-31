@@ -1,15 +1,19 @@
 {
   "name": "Reall",
   "version": "1.0.0",
-  "description": "",
+  "description": "Real Esate Manager & Services",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/absolute-fx/Reall.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --config webpack.common.js --watch",
     "start": "electron ."
   },
   "keywords": [],
-  "author": "",
+  "author": "AfxLab",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.0",
@@ -17,15 +21,14 @@
     "edit-json-file": "^1.5.0",
     "electron": "^10.1.4",
     "electron-promise-ipc": "^2.2.1",
+    "electron-updater": "^4.3.5",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",
     "react": "^17.0.0",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.0",
     "react-multi-lang": "^2.1.1",
-    "react-redux": "^7.2.1",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5"
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

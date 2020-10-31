@@ -1,1 +1,29 @@
-{}
+{
+  "licence_check": {
+    "insert_key_message_a": "Voer uw",
+    "insert_key_message_b": "licentiesleutel in.",
+    "licence_key": "LICENTIESLEUTEL",
+    "save": "Redden"
+  },
+  "sign_in": {
+    "login": "E-MAIL",
+    "password": "WATCHWOORD",
+    "auto_connect": "Automatische verbinding",
+    "forgotten": "Je wachtwoord vergeten",
+    "button": "verbinding"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projecten",
+    "realty": "Eigendommen",
+    "libraries": "Bibliotheken",
+    "clients": "klanten",
+    "accounting": "boekhouding",
+    "support": "Support",
+    "parameters": "Instellingen",
+    "users": "Gebruikers",
+    "services": "Diensten",
+    "help": "Helpen",
+    "sign_out": "ontkoppeling"
+  }
+}

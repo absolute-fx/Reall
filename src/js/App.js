@@ -1,7 +1,12 @@
 import React, {useState, useMemo, useEffect} from 'react';
 import {HashRouter as Router, Switch, Route} from 'react-router-dom';
-import Navigation from './components/Navigation';
+import { setTranslations, setDefaultLanguage, setLanguage } from 'react-multi-lang';
+// LANGUAGES
+import fr from '../languages/fr.json';
+import nl from '../languages/nl.json';
+import en from '../languages/en.json';
 // PAGES
+import Navigation from './components/Navigation';
 import LicenceCheck from "./components/pages/LicenceCheck";
 import ParamsPreload from "./components/pages/ParamsPreload";
 import SignIn from "./components/pages/SignIn";
@@ -16,13 +21,17 @@ import Users from './components/pages/Users';
 import Services from './components/pages/Services';
 import Help from './components/pages/Help';
 import Disconnect from "./components/pages/Diconnect";
-// contexts
+// CONTEXTS
 import {UserContext} from './contexts/UserContext';
 import {FooterLoaderContext} from './contexts/FooterLoaderContext';
 import {AppParamsContext} from "./contexts/AppParamsContext";
 import {LicenceContext} from "./contexts/LicenceContext";
 
 import Footer from "./components/Footer";
+
+// TRANSLATIONS SETUP
+setTranslations({fr, nl, en});
+
 
 function App(){
 
@@ -49,6 +58,12 @@ function App(){
         getParams();
         getAppVersion();
     }, []);
+
+    useEffect(() => {
+        if(appParams){
+            setDefaultLanguage(appParams.user.language);
+        }
+    }, [appParams])
 
     return(
         <Router>

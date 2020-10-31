@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import {useTranslation} from "react-multi-lang";
 import {NavLink} from "react-router-dom";
 import {MainNavItems, SecondaryNavItems} from "./NavItems";
 import {UserContext} from "../contexts/UserContext";
@@ -17,6 +18,7 @@ const Navigation = (props) => {
         setToggle(active === "" ? "active": "");
     }
 
+    const t = useTranslation();
 
     if(user){
 
@@ -52,7 +54,7 @@ const Navigation = (props) => {
                         <li key={index} >
                             <NavLink exact to={nav.href} activeClassName="active" >
                                 <i className={"fas " + nav.icon}/>
-                                <span>{nav.label}</span>
+                                <span>{t("nav." + nav.label)}</span>
                             </NavLink>
                         </li>
                     ))}
@@ -62,7 +64,7 @@ const Navigation = (props) => {
                         <li key={index}>
                             <NavLink to={secondaryNav.href} activeClassName="active" >
                                 <i className={"fas " + secondaryNav.icon}/>
-                                <span>{secondaryNav.label}</span>
+                                <span>{t("nav." + secondaryNav.label)}</span>
                             </NavLink>
                         </li>
                     ))}
