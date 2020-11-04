@@ -1,11 +1,13 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useTranslation} from "react-multi-lang";
-import axios from "axios";
+import {useHistory} from "react-router-dom";
+// AUTH
+import auth from "../auth";
+// CONTEXTS
+import {LicenceContext} from "../../contexts/LicenceContext";
 import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
-import {LicenceContext} from "../../contexts/LicenceContext";
-import {useHistory} from "react-router-dom";
 
 const SignIn = (props) => {
 
@@ -52,33 +54,33 @@ const SignIn = (props) => {
         }
     }, [appParams])
 
-    const onSubmit = (e) => {
+    const connect = async (data) => {
+        const userData = await auth.SignIn()
+    }
+
+    const onSubmit = async (e) => {
         e.preventDefault();
         if(username && password){
             setLoading(true);
             setFooterLoader({active: true, message: 'Connecting to API...'})
-            const apiLink = licence.api_link + 'auth/signin';
-            axios.post(apiLink, JSON.stringify({username: username, password: password}), { headers: { 'Content-Type': 'application/json'}})
-                .then(function (response) {
-                    let contextUser = response.data.user;
-                    contextUser.accessToken = response.data.accessToken;
-                    // handle success...
-                    saveParams().then(() => {
-                        setUser(contextUser);
-                        setFooterLoader({active: false, message: ''});
-                        setAlert({visibility: false, message: ""})
-                        history.push("/");
-                    });
-                })
-                .catch(function (error) {
-                    console.log(error.response);
-                    setLoading(false);
+            const apiLink = licence.api_link;
+            const userData = await auth.signIn(
+                apiLink,
+                {username: username, password: password}
+            );
+
+            if(userData.auth){
+                saveParams().then(() => {
+                    setUser(userData);
                     setFooterLoader({active: false, message: ''});
-                    setAlert({visibility: true, message: error.response.data.reason});
-                })
-                .then(function () {
-                    // always executed
+                    setAlert({visibility: false, message: ""});
+                    history.push("/");
                 });
+            }else{
+                setLoading(false);
+                setFooterLoader({active: false, message: ''});
+                setAlert({visibility: true, message: userData.reason});
+            }
         }
     }
 

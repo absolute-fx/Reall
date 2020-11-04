@@ -8,7 +8,7 @@ const Dashboard = (props) => {
     const{ user, setUser} = useContext(UserContext);
     const{ footerLoader, setFooterLoader} = useContext(FooterLoaderContext);
     let history = useHistory();
-    if (!user) history.push("/licence");
+    //if (!user) history.push("/licence");
     //console.log(user);
     //console.log(footerLoader);
 

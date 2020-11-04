@@ -9,6 +9,9 @@ contextBridge.exposeInMainWorld('electron', {
             ipcRenderer.send('notify', message)
         }
     },
+    authApi:{
+        
+    },
     desktopFilesApi:{
         getAppRootDir(){
             return __dirname;

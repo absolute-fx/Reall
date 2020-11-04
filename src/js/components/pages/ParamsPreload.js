@@ -1,11 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
-import axios from "axios";
 import {useHistory} from "react-router-dom";
+import axios from "axios";
+// AUTH
+import auth from '../auth';
+// CONTEXTS
 import {UserContext} from "../../contexts/UserContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
-
 
 const ParamsPreload = () => {
 
@@ -17,7 +19,22 @@ const ParamsPreload = () => {
 
     const saveParams = async () =>{
         await electron.parametersApi.setAppParams([{node: "user.auto_connect", value: false}]);
-    }
+    };
+
+    const getUser = async (api, data) => {
+        const user_data = await auth.signIn(api, data)
+        console.log(user_data)
+        if(user_data.auth){
+            setUser(user_data);
+            setFooterLoader({active: false, message: ''});
+            history.push("/");
+        }else{
+            setFooterLoader({active: false, message: ''});
+            saveParams().then(() => {
+                history.push("/login");
+            });
+        }
+    } 
 
     useEffect(() => {
         setFooterLoader({active: true, message: 'Connecting to API...'})
@@ -27,35 +44,14 @@ const ParamsPreload = () => {
                 if(appParams.user.auto_connect){
                     if(appParams.user.login && appParams.user.password)
                     {
-                        const apiLink = licence.api_link + 'auth/signin';
-                        axios.post(apiLink, JSON.stringify({username: appParams.user.login, password: appParams.user.password}), { headers: { 'Content-Type': 'application/json'}})
-                            .then(function (response) {
-                                let contextUser = response.data.user;
-                                contextUser.accessToken = response.data.accessToken;
-                                // handle success...
-                                setUser(contextUser);
-                                setFooterLoader({active: false, message: ''});
-                                history.push("/");
-
-                            })
-                            .catch(function (error) {
-                                console.log(error.response);
-                                setFooterLoader({active: false, message: ''});
-                                saveParams().then(() => {
-                                    history.push("/login");
-                                });
-                            })
-                            .then(function () {
-                                // always executed
-                            });
+                        const apiLink = licence.api_link;
+                        getUser(apiLink, {username: appParams.user.login, password: appParams.user.password});
                     }else{
                         setFooterLoader({active: false, message: ''})
                         saveParams().then(() => {
                             history.push("/login");
                         });
                     }
-                    // AUTO CONNECT
-                    /* */
                 }else{
                     // SIGN IN FORM
                     setFooterLoader({active: false, message: ''})
@@ -70,6 +66,13 @@ const ParamsPreload = () => {
             history.push("/login");
         }
     }, [appParams])
+
+    useEffect(() => {
+        //console.log(user)
+        if(user){
+            //console.log(user)
+        }
+    }, [user])
 
     return(
         <>

@@ -1,10 +1,12 @@
 import React, {useState, useMemo, useEffect} from 'react';
 import {HashRouter as Router, Switch, Route} from 'react-router-dom';
-import { setTranslations, setDefaultLanguage, setLanguage } from 'react-multi-lang';
+import {setTranslations, setDefaultLanguage, setLanguage } from 'react-multi-lang';
 // LANGUAGES
 import fr from '../languages/fr.json';
 import nl from '../languages/nl.json';
 import en from '../languages/en.json';
+// AUTH
+import ProtectedRoute from './components/ProtectedRoute';
 // PAGES
 import Navigation from './components/Navigation';
 import LicenceCheck from "./components/pages/LicenceCheck";
@@ -77,17 +79,18 @@ function App(){
                                     <Route path="/licence" exact component={LicenceCheck} />
                                     <Route path="/params" exact component={ParamsPreload} />
                                     <Route path="/login" exact component={SignIn} />
-                                    <Route path="/" exact component={Dashboard} />
-                                    <Route path="/projects" exact component={Projects} />
-                                    <Route path="/libraries" exact component={Libraries} />
-                                    <Route path="/clients" exact component={Clients} />
-                                    <Route path="/accounting" exact component={Accounting} />
-                                    <Route path="/support" exact component={Support} />
-                                    <Route path="/parameters" exact component={Parameters} />
-                                    <Route path="/users" exact component={Users} />
-                                    <Route path="/services" exact component={Services} />
-                                    <Route path="/help" exact component={Help} />
-                                    <Route path="/signout" exact component={Disconnect} />
+                                    <ProtectedRoute path="/" exact component={Dashboard} />
+                                    <ProtectedRoute path="/projects" exact component={Projects} />
+                                    <ProtectedRoute path="/libraries" exact component={Libraries} />
+                                    <ProtectedRoute path="/clients" exact component={Clients} />
+                                    <ProtectedRoute path="/accounting" exact component={Accounting} />
+                                    <ProtectedRoute path="/support" exact component={Support} />
+                                    <ProtectedRoute path="/parameters" exact component={Parameters} />
+                                    <ProtectedRoute path="/users" exact component={Users} />
+                                    <ProtectedRoute path="/services" exact component={Services} />
+                                    <ProtectedRoute path="/help" exact component={Help} />
+                                    <ProtectedRoute path="/signout" exact component={Disconnect} />
+                                    <Route path="*" component={() => {"404 NOT FIND"}}/>
                                 </Switch>
                                 <Footer appVersion={appVersion} />
                             </main>

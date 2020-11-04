@@ -4,8 +4,10 @@ const  promiseIpc =  require('electron-promise-ipc');
 const isDev = !app.isPackaged;
 const RCkMenu = require("electron").Menu;
 const RCMenuItems = require("electron").MenuItem;
+const autoUpdater = require('./src/core/AutoUpdate').autoUpdate;
 
 let win;
+let aU;
 
 function createWindow(){
     win = new BrowserWindow({
@@ -21,6 +23,9 @@ function createWindow(){
             preload: path.join(__dirname, 'preload.js')
         }
     })
+
+    //aU = new autoUpdater(win);
+
     win.loadFile('index.html');
     win.removeMenu();
 
@@ -28,9 +33,9 @@ function createWindow(){
     const ctxMenu = new RCkMenu();
     ctxMenu.append(new RCMenuItems(
         {
-        label: 'Add project',
+        label: 'Debug',
         click: () => {
-            console.log('hello world')
+            win.webContents.openDevTools();
         }
     }));
     ctxMenu.append(new RCMenuItems(
@@ -41,12 +46,18 @@ function createWindow(){
             }
         }));
 
+    ctxMenu.append(new RCMenuItems(
+        {
+            label: win.webContents.getURL()
+        }));
+
     win.webContents.on('context-menu', (e, params) => {
         ctxMenu.popup(win, params.x, params.y)
     });
 
-    if(isDev) {
+    if(!isDev) {
         //win.webContents.openDevTools();
+        //aU.autoUpdater.checkForUpdates();
     }
 
 

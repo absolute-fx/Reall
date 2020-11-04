@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {useTranslation} from "react-multi-lang";
 import {NavLink} from "react-router-dom";
-import {MainNavItems, SecondaryNavItems} from "./NavItems";
+import {mainNavItems, secondaryNavItems} from "./navItems";
 import {UserContext} from "../contexts/UserContext";
 import moment from 'moment';
 
@@ -10,8 +10,8 @@ const Navigation = (props) => {
     const{ user, setUser} = useContext(UserContext);
     const rootDir = electron.desktopFilesApi.getAppRootDir();
 
-    const mainNavData = MainNavItems;
-    const secondaryNavDate = SecondaryNavItems;
+    const mainNavData = mainNavItems;
+    const secondaryNavData = secondaryNavItems;
 
     const [active, setToggle] = useState("");
     const toggleNav = () => {
@@ -60,7 +60,7 @@ const Navigation = (props) => {
                     ))}
                 </ul>
                 <ul id="secondaryNav" className="list-unstyled components secondary-nav">
-                    {secondaryNavDate.map((secondaryNav, index)=>(
+                    {secondaryNavData.map((secondaryNav, index)=>(
                         <li key={index}>
                             <NavLink to={secondaryNav.href} activeClassName="active" >
                                 <i className={"fas " + secondaryNav.icon}/>

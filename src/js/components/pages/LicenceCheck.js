@@ -26,7 +26,13 @@ const LicenceCheck = () => {
             setFooterLoader({active: true, message: 'Checking licence...'});
             setLoading(true);
             // TEMP
-            setLicence({valid: true, licence_key: e.target.value, licence_type: "full", company_holder: "AfxLab", end_date: "2021-12-10 00:00:00", api_link: "https://imoges-api.herokuapp.com/api/"});
+            setLicence({
+                valid: true, 
+                licence_key: e.target.value, 
+                licence_type: "full", 
+                company_holder: "AfxLab", 
+                end_date: "2021-12-10 00:00:00", 
+                api_link: "https://imoges-api.herokuapp.com/api/"});
             saveParams().then(() => {
                 setFooterLoader({active: false, message: ''});
                 history.push("/params");
@@ -48,7 +54,13 @@ const LicenceCheck = () => {
             if(appParams.user.licence_key !== ""){
                 // SI CLE
                 // TEMP (check de la licence à faire)
-                setLicence({valid: true, licence_key: appParams.user.licence_key, licence_type: "full", company_holder: "AfxLab", end_date: "2021-12-10 00:00:00", api_link: "https://imoges-api.herokuapp.com/api/"});
+                setLicence({
+                    valid: true, 
+                    licence_key: appParams.user.licence_key, 
+                    licence_type: "full", 
+                    company_holder: "AfxLab", 
+                    end_date: "2021-12-10 00:00:00", 
+                    api_link: "https://imoges-api.herokuapp.com/api/"});
                 setFooterLoader({active: false, message: ''});
                 history.push("/params");
             }else{

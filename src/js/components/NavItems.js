@@ -1,5 +1,5 @@
 
-const MainNavItems = [
+const mainNavItems = [
     {label: "dashboard", icon: "fa-home", href:"/"},
     {label: "projects", icon: "fa-project-diagram", href:"/projects"},
     {label: "realty", icon: "fa-building", href:"/realty"},
@@ -9,7 +9,7 @@ const MainNavItems = [
     {label: "support", icon: "fa-life-ring", href:"/support"}
 ];
 
-const SecondaryNavItems = [
+const secondaryNavItems = [
     {label: "parameters", icon: "fa-cog", href:"/parameters"},
     {label: "users", icon: "fa-user-friends", href:"/users"},
     {label: "services", icon: "fa-rocket", href:"/services"},
@@ -17,4 +17,4 @@ const SecondaryNavItems = [
     {label: "sign_out", icon: "fa-user-alt-slash", href:"/signout"}
 ];
 
-export {MainNavItems, SecondaryNavItems};
+export {mainNavItems, secondaryNavItems};

@@ -48,14 +48,6 @@ class ManageParameters{
         });
     }
 
-    static setMultipleParameters(path, params)
-    {
-        return new Promise (function(resolve, reject) {
-            fs.writeFileSync(path + '/parameters.json', JSON.stringify(params));
-            resolve(params);
-        });
-    }
-
     static getDefaultParams()
     {
         let appParameters;
