@@ -25,5 +25,13 @@
     "services": "Services",
     "help": "Aide",
     "sign_out": "Déconnexion"
+  },
+  "projects": {
+    "title": "Projets",
+    "search": "RECHERCHE",
+    "name": "Nom",
+    "sales": "Vente",
+    "map": "Carte",
+    "tools": "Outils"
   }
 }

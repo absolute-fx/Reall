@@ -11,10 +11,11 @@ let aU;
 
 function createWindow(){
     win = new BrowserWindow({
-        width: 1400,
-        height: 960,
-        minWidth: 1200,
-        minHeight: 960,
+        width: 1550,
+        height: 1040,
+        minWidth: 1550,
+        minHeight: 1060,
+        icon: "icon.ico",
         backgroundColor: "white",
         webPreferences:{
             nodeIntegration: false,

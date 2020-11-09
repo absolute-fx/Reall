@@ -25,5 +25,13 @@
     "services": "Services",
     "help": "Help",
     "sign_out": "Sign out"
+  },
+  "projects": {
+    "title": "Projects",
+    "search": "SEARCH",
+    "name": "Name",
+    "sales": "Sales",
+    "map": "Map",
+    "tools": "Tools"
   }
 }

@@ -2,7 +2,8 @@ import React, {useContext, useEffect} from "react";
 import {UserContext} from "../../contexts/UserContext";
 import {useHistory} from "react-router-dom";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
-import {LicenceContext} from "../../contexts/LicenceContext";
+// AUTH
+import auth from '../auth';
 
 const Disconnect = () => {
     const{ user, setUser} = useContext(UserContext);
@@ -16,8 +17,9 @@ const Disconnect = () => {
     useEffect(() => {
         setUser(null);
         setAppParams(null);
+        auth.signOut();
         saveParams().then(() => {
-            history.push("/params");
+            history.push("/login");
         });
     }, []);
 

@@ -15,7 +15,7 @@ class Auth{
                     username: userQuery.username, 
                     password: userQuery.password}), 
                 { headers: { 'Content-Type': 'application/json'}}
-            );
+            )
             let user_data = res.data.user;
             user_data.auth = res.data.auth;
             user_data.accessToken = res.data.accessToken;
@@ -23,15 +23,20 @@ class Auth{
             this.roles = user_data.roles;
             return user_data;
         }catch(error){
-            console.log(error.response);
-            return error.response.data;
+            console.log(error);
+            if(!error){
+                return error.response.data;
+            }else{
+                return {auth: false, reason: 'Can not reach the server'};
+            }
+            
         }
     }
 
-    signOut(callBack){
+    signOut(){
         this.authenticated = false;
         this.roles = [];
-        callBack();
+        //callBack();
     }
 
     isAuthentificated(){

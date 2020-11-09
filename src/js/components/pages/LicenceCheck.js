@@ -23,7 +23,7 @@ const LicenceCheck = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         if(licenceKey !== ""){
-            setFooterLoader({active: true, message: 'Checking licence...'});
+            setFooterLoader({active: true, message: 'Checking licence...', icon: "fa fa-spinner brand-color spin"});
             setLoading(true);
             // TEMP
             setLicence({
@@ -32,9 +32,11 @@ const LicenceCheck = () => {
                 licence_type: "full", 
                 company_holder: "AfxLab", 
                 end_date: "2021-12-10 00:00:00", 
-                api_link: "https://imoges-api.herokuapp.com/api/"});
+                //api_link: "https://imoges-api.herokuapp.com/api/"}
+                api_link: "http://127.0.0.1:4000/api/"}
+            );
             saveParams().then(() => {
-                setFooterLoader({active: false, message: ''});
+                setFooterLoader({active: false, message: '', icon: ''});
                 history.push("/params");
             });
         }
@@ -45,7 +47,7 @@ const LicenceCheck = () => {
     }
 
     useEffect(() => {
-        setFooterLoader({active: true, message: 'Checking licence...'});
+        setFooterLoader({active: true, message: 'Checking licence...', icon: "fa fa-spinner brand-color spin"});
     }, [])
 
     useEffect(() => {
@@ -57,15 +59,17 @@ const LicenceCheck = () => {
                 setLicence({
                     valid: true, 
                     licence_key: appParams.user.licence_key, 
-                    licence_type: "full", 
+                    licence_type: "Full", 
                     company_holder: "AfxLab", 
-                    end_date: "2021-12-10 00:00:00", 
-                    api_link: "https://imoges-api.herokuapp.com/api/"});
-                setFooterLoader({active: false, message: ''});
+                    end_date: "2021-06-10 00:00:00", 
+                    //api_link: "https://imoges-api.herokuapp.com/api/"}
+                    api_link: "http://127.0.0.1:4000/api/"}
+                );
+                setFooterLoader({active: false, message: '', icon:''});
                 history.push("/params");
             }else{
                 setDisplayForm('');
-                setFooterLoader({active: false, message: ''});
+                setFooterLoader({active: false, message: '', icon: ''});
             }
         }
     }, [appParams])

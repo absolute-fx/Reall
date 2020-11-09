@@ -51,6 +51,8 @@ const SignIn = (props) => {
     useEffect(()=>{
         if(appParams){
             setUserName(appParams.user.login);
+            setUserPassword(appParams.user.password);
+            setAutoConnect(appParams.user.auto_connect);
         }
     }, [appParams])
 
@@ -62,7 +64,7 @@ const SignIn = (props) => {
         e.preventDefault();
         if(username && password){
             setLoading(true);
-            setFooterLoader({active: true, message: 'Connecting to API...'})
+            setFooterLoader({active: true, message: 'Connecting to API...', icon: "fa fa-spinner brand-color spin"})
             const apiLink = licence.api_link;
             const userData = await auth.signIn(
                 apiLink,
@@ -72,13 +74,13 @@ const SignIn = (props) => {
             if(userData.auth){
                 saveParams().then(() => {
                     setUser(userData);
-                    setFooterLoader({active: false, message: ''});
-                    setAlert({visibility: false, message: ""});
+                    setFooterLoader({active: false, message: '', icon:''});
+                    setAlert({visibility: false, message: "", icon:''});
                     history.push("/");
                 });
             }else{
                 setLoading(false);
-                setFooterLoader({active: false, message: ''});
+                setFooterLoader({active: true, message: userData.reason, icon: "fa fa-exclamation-circle text-danger"});
                 setAlert({visibility: true, message: userData.reason});
             }
         }
@@ -91,7 +93,7 @@ const SignIn = (props) => {
             <div className="sign-in-logo">reall<small className="text-primary">©</small></div>
             <div className="sign-in-container">
                 <div className="panel sign-in-panel">
-                    <form onSubmit={onSubmit}>
+                    <form className="login-form" onSubmit={onSubmit}>
                         <div className="row">
                             <div className="col-md-9">
                                 <div className="form-group">
@@ -130,7 +132,7 @@ const SignIn = (props) => {
                     <div className="row">
                         <div className="col mt-3">
                             <div id="dark-mode-switch" className="custom-control custom-switch">
-                                <input name="autoconnect" type="checkbox" onChange={autoConnectChange} className="custom-control-input" id="autoConnectSwitch"/>
+                                <input name="autoconnect" type="checkbox" checked={autoConnect ? true : false} onChange={autoConnectChange} className="custom-control-input" id="autoConnectSwitch"/>
                                 <label className="custom-control-label" htmlFor="autoConnectSwitch">{t('sign_in.auto_connect')}</label>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 {
   "name": "Reall",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Real Esate Manager & Services",
   "main": "main.js",
   "repository": {
@@ -12,6 +12,44 @@
     "watch": "webpack --config webpack.common.js --watch",
     "start": "electron ."
   },
+  "build": {
+    "appId": "com.my.app",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "absolute-fx",
+        "repo": "Reall"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "installerHeaderIcon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "dmg": {
+      "icon": "build/icon.icns",
+      "contents": [
+        {
+          "x": 345,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 125,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    }
+  },
   "keywords": [],
   "author": "AfxLab",
   "license": "ISC",
@@ -22,6 +60,7 @@
     "electron": "^10.1.4",
     "electron-promise-ipc": "^2.2.1",
     "electron-updater": "^4.3.5",
+    "google-map-react": "^2.1.9",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",
     "react": "^17.0.0",

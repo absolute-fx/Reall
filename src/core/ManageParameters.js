@@ -53,9 +53,10 @@ class ManageParameters{
         let appParameters;
         appParameters = {
             version: "1.0.0",
+            navToggled: false,
             system: {
                 root_path: '',
-                upload_path: 'http://imoges.afxlab.be/upload.php',
+                upload_path: '',
                 cloud_library_path:"",
                 projects_dirs: {
                     default: {libraries: 'Bibliothèque', realties: 'Biens'},
@@ -67,12 +68,15 @@ class ManageParameters{
                 },
                 resize_img_delay_ratio: 0.1
             },
+            external_api: {
+              gm_key: ""
+            },
             user:{
                 login: '',
                 password: '',
                 auto_connect: false,
                 licence_key: '',
-                "language": "en"
+                language: "en"
             },
             project: {
                 project_phases: [],

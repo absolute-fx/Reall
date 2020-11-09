@@ -80,6 +80,14 @@ html, body {
   user-select: none;
 }
 
+*:focus {
+  outline: none;
+}
+
+p{
+  font-size: 1rem;
+}
+
 .brand-font{
   font-family: "brand-font";
 }
@@ -243,6 +251,19 @@ a:hover{
   margin-top: 1rem
 }
 
+#sidebar.active ul li a:hover{
+  i{
+    margin-right: 0rem;
+  }
+}
+
+#sidebar.active ul li a.active:hover{
+  i{
+    transition: none;
+    margin-right: 0rem!important;
+  }
+}
+
 #sidebar.active ul li a span{
   display: none!important;
 }
@@ -394,19 +415,58 @@ a[aria-expanded="true"]:hover{
   box-shadow: $main-shadows;
 
   header{
-    border-bottom: color(background-lighter) 1px solid;
+    //border-bottom: color(background-lighter) 1px solid;
     padding-bottom: 1rem;
+    input{
+      height: 2.2rem !important;
+      border: none !important;
+      border-radius: $inputRadius !important;
+      box-shadow: $input-shadows !important;
+      background-color: color(background) !important;
+      padding: 0.5rem;
+    }
+
+    input:focus{
+      background-color: color(background-lighter) !important;
+    }
 
     h1{
       text-transform: uppercase;
       margin-bottom: 0;
       font-size: 2rem;
+      button{
+        box-shadow: $form-btn-shadows;
+        border: none;
+        background-color: color(background);
+        font-weight: bold;
+        padding: .0 .5rem;
+        border-radius: 0.5rem;
+        color: color(brand-color);
+        text-shadow: $text-shadow !important;
+      }
+      button:hover{
+        box-shadow: none;
+        background-color: color(background-dark);
+        color: color(brand-color-light);
+      }
+      button:focus{
+        background-color: color(background);
+        outline: none!important;
+        border: none!important;
+      }
     }
   }
 
+  .panel-separator{
+    height: .5rem;
+    border-top: color(background-lighter) 1px solid;
+    border-bottom: color(background-darker) 1px solid;
+  }
+
   .panel-content{
-    padding-top: 1rem;
-    border-top: color(background-darker) 1px solid;
+    margin-top: 1rem;
+    //border-top: color(background-darker) 1px solid;
+    overflow: auto;
   }
 
   footer{
@@ -416,6 +476,30 @@ a[aria-expanded="true"]:hover{
     color: color(primary-text);
     text-shadow: $text-shadow !important;
   }
+}
+
+.panel-content::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	background-color: #F5F5F5;
+}
+
+.panel-content::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.panel-content::-webkit-scrollbar-thumb
+{
+	border-radius: 3px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: color(primary-text-light);
+}
+
+.ps-t{
+  margin-top: $spacer * 2;
 }
 
 .sign-in-container{
@@ -530,7 +614,7 @@ aside {
   }
 }
 
-form{
+.login-form{
   input{
     height: 40px !important;
     border: none !important;
@@ -564,6 +648,7 @@ form{
   width: 100%;
   height: 100%;
 }
+
 
 // user side box
 .avatar, .project-img{
@@ -606,10 +691,14 @@ form{
     line-height: 40px;
     .fa{
       margin-right: .5rem;
-      animation: spin-animation 1s infinite;
+      //animation: spin-animation 1s infinite;
       display: inline-block;
     }
   }
+}
+
+.spin{
+  animation: spin-animation 1s infinite;
 }
 
 .footer-left{
@@ -632,6 +721,22 @@ form{
       display: inline-block;
     }
   }
+}
+
+.reall-table-pin{
+  background-color: color(brand-color);
+  color: #FFFFFF;
+  padding: .4rem .65rem;
+  border-radius: 50%;
+  font-family: "brand-font";
+}
+
+.unactive{
+  color: color(background-dark);
+}
+
+.table th{
+  border-top: none;
 }
 
 @keyframes spin-animation {

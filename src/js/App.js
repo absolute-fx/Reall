@@ -53,7 +53,7 @@ function App(){
 
     const [user, setUser] = useState(null);
     const userDataProvider = useMemo(() => ({user, setUser}), [user, setUser]);
-    const [footerLoader, setFooterLoader] = useState({active: false, message: ""});
+    const [footerLoader, setFooterLoader] = useState({active: false, message: "", icon: "fa fa-spinner  brand-color"});
     const footerLoaderProvider = useMemo(() => ({footerLoader, setFooterLoader}), [footerLoader, setFooterLoader]);
 
     useEffect(()=>{

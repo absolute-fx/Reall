@@ -25,5 +25,13 @@
     "services": "Diensten",
     "help": "Helpen",
     "sign_out": "ontkoppeling"
+  },
+  "projects": {
+    "title": "Projecten",
+    "search": "ZOEKEN",
+    "name": "Naam",
+    "sales": "Uitverkoop",
+    "map": "Kaart",
+    "tools": "Gereedschap"
   }
 }

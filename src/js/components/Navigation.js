@@ -1,22 +1,36 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useTranslation} from "react-multi-lang";
 import {NavLink} from "react-router-dom";
 import {mainNavItems, secondaryNavItems} from "./navItems";
 import {UserContext} from "../contexts/UserContext";
-import moment from 'moment';
+import {AppParamsContext} from "../contexts/AppParamsContext";
 
 const Navigation = (props) => {
 
     const{ user, setUser} = useContext(UserContext);
+    const {appParams, setAppParams} = useContext(AppParamsContext);
     const rootDir = electron.desktopFilesApi.getAppRootDir();
+    
 
     const mainNavData = mainNavItems;
     const secondaryNavData = secondaryNavItems;
 
+    const saveParams = async (isToglled) =>{
+        await electron.parametersApi.setAppParams([{node: "navToggled", value: isToglled}]);
+    };
+
     const [active, setToggle] = useState("");
     const toggleNav = () => {
-        setToggle(active === "" ? "active": "");
+        const isToglled = active === "" ? true: false;
+        setAppParams({...appParams, "navToggled": isToglled});
+        saveParams(isToglled)
     }
+
+    useEffect(() => {
+        if(appParams){
+            setToggle(appParams.navToggled ? 'active': '');
+        }
+    }), [appParams];
 
     const t = useTranslation();
 
