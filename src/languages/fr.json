@@ -1,7 +1,7 @@
 {
   "licence_check": {
     "insert_key_message_a": "Veuillez insérer votre clé de licence",
-    "insert_key_message_b": "",
+    "insert_key_message_b": " ",
     "licence_key": "CLÉ DE LICENCE",
     "save": "Sauver"
   },

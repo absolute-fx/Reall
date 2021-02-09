@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import GoogleMapReact from 'google-map-react';
+import {AppParamsContext} from "../contexts/AppParamsContext";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const SimpleMap = ()=> {
+  const {appParams, setAppParams} = useContext(AppParamsContext)
   	const defaultProps = {
 		center: {
 			lat: 59.95,
@@ -15,7 +17,7 @@ const SimpleMap = ()=> {
     return (
       <div style={{ height: '400px', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyCHZgeAFvnvSviFqypH3egcmqqObOTLBo8' }}
+          bootstrapURLKeys={{ key: appParams.external_api.gm_key }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >

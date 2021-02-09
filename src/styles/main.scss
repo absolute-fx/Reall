@@ -54,14 +54,31 @@ $panel-padding: 1rem;
 
 // boostrap mod part
 $theme-colors:(
-        "primary" : #9daae3,
-        "secondary": #CECECE,
-        "light": color(background)
+  "primary" : #9daae3,
+  "secondary": #CECECE,
+  "light": color(background)
 );
 $body-bg:color(background);
 $border-radius: .5rem;
 $thumbnail-padding: .3rem;
 $thumbnail-border-width: 0px;
+
+.btn-primary{
+  border-radius: $inputRadius!important;
+  box-shadow: $form-btn-shadows !important;
+  background-color: color(background) !important;
+  border: none !important;
+  color: color(primary-text) !important;
+  text-transform: uppercase !important;
+  text-shadow: $text-shadow-bold !important;
+  font-weight: bold !important;
+}
+
+.btn-primary:hover{
+  background-color: color(background-dark) !important;
+  box-shadow: none!important;
+  //color: color(brand-color-light) !important;
+}
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -434,6 +451,7 @@ a[aria-expanded="true"]:hover{
       text-transform: uppercase;
       margin-bottom: 0;
       font-size: 2rem;
+      color: color(brand-color);
       button{
         box-shadow: $form-btn-shadows;
         border: none;
@@ -649,6 +667,52 @@ aside {
   height: 100%;
 }
 
+form{
+  textarea,select,input{
+    border: none!important;
+    border-radius: $inputRadius !important;
+    box-shadow: $input-shadows !important;
+    background-color: color(background) !important;
+    padding: 1rem!important;
+  }
+  textarea:focus, select:focus, input:focus{
+    background-color: color(background-lighter) !important;
+  }
+  label{
+    text-shadow: $text-shadow !important;
+  }
+  .form-separator{
+    border-top: color(background-darker) 1px solid;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+.form-website{
+  background-color: color(background-dark);
+  border-radius: $inputRadius !important;
+  padding-top: 1rem;
+}
+
+.form-section{
+  box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, .9), inset
+  -1px -1px 1px 0 rgba(0, 0, 0, .1);
+  border-radius: .5rem;
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.fs-left{
+  padding: 0 .25rem 0 0;
+}
+
+.fs-right{
+  padding: 0 0 0 .25rem;
+}
+
+.fs-center{
+  padding: 0 .25rem 0 .25rem;
+}
 
 // user side box
 .avatar, .project-img{

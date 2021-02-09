@@ -14,6 +14,7 @@ import ParamsPreload from "./components/pages/ParamsPreload";
 import SignIn from "./components/pages/SignIn";
 import Dashboard from './components/pages/Dashboard';
 import Projects from './components/pages/Projects';
+import Realty from './components/pages/Realty';
 import Libraries from './components/pages/Libraries';
 import Clients from './components/pages/Clients';
 import Accounting from './components/pages/Accounting';
@@ -81,6 +82,7 @@ function App(){
                                     <Route path="/login" exact component={SignIn} />
                                     <ProtectedRoute path="/" exact component={Dashboard} />
                                     <ProtectedRoute path="/projects" exact component={Projects} />
+                                    <ProtectedRoute path="/realty" exact component={Realty} />
                                     <ProtectedRoute path="/libraries" exact component={Libraries} />
                                     <ProtectedRoute path="/clients" exact component={Clients} />
                                     <ProtectedRoute path="/accounting" exact component={Accounting} />
@@ -90,7 +92,7 @@ function App(){
                                     <ProtectedRoute path="/services" exact component={Services} />
                                     <ProtectedRoute path="/help" exact component={Help} />
                                     <ProtectedRoute path="/signout" exact component={Disconnect} />
-                                    <Route path="*" component={() => {"404 NOT FIND"}}/>
+                                    <Route path="*" component={() => {"404 NOT FOUND"}}/>
                                 </Switch>
                                 <Footer appVersion={appVersion} />
                             </main>
