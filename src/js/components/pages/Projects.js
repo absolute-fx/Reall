@@ -146,6 +146,8 @@ const Projects = (props) => {
 				position: new google.maps.LatLng(project.project_lat, project.project_long),
 				map: projectMap
 			})
+
+			console.log(project.realties);
 		}
 	}, [project]);
 

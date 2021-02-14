@@ -54,7 +54,7 @@
   "author": "AfxLab",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "edit-json-file": "^1.5.0",
     "electron": "^10.1.4",
