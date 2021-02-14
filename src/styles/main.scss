@@ -74,11 +74,24 @@ $thumbnail-border-width: 0px;
   font-weight: bold !important;
 }
 
-.btn-primary:hover{
+.btn-primary:hover,
+.btn-secondary:hover{
   background-color: color(background-dark) !important;
   box-shadow: none!important;
   //color: color(brand-color-light) !important;
 }
+
+.btn-secondary{
+  border-radius: $inputRadius!important;
+  box-shadow: $form-btn-shadows !important;
+  background-color: color(background) !important;
+  border: none !important;
+  color: color(primary-text) !important;
+  text-transform: uppercase !important;
+  text-shadow: $text-shadow-bold !important;
+  padding: 0 1rem !important;
+}
+
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -803,6 +816,19 @@ form{
   border-top: none;
 }
 
+.reall-datatable{
+  tbody{
+    tr{
+      cursor: pointer;
+      transition: background-color 1s;
+    }
+    tr:hover{
+      background-color: color(background-dark);
+      transition: background-color .2s;
+    }
+  }
+}
+
 @keyframes spin-animation {
   0% {
     transform: rotate(0deg);
@@ -814,6 +840,10 @@ form{
 
 #invoice-board{
   margin-top: 2rem!important;
+}
+
+#project-map{
+  height: 300px;
 }
 
 /* ---------------------------------------------------

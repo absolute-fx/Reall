@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Datatable = ({projects}) => {
+const Datatable = ({onProjectSelected, projects}) => {
     
     const getPercentSold = (realties) => {
         let percent = "";
@@ -17,8 +17,12 @@ const Datatable = ({projects}) => {
         return percent;
     }
 
+    const getProjectPage = (project) =>{
+        onProjectSelected(project);
+    }
+
     return (
-        <table className="table">
+        <table className="table reall-datatable">
             <thead>
                 <tr>
                     <th>Nom</th>
@@ -28,7 +32,7 @@ const Datatable = ({projects}) => {
             </thead>
             <tbody>
                 {projects.map((project, index) => (
-                    <tr key={index}>
+                    <tr key={index} onClick={() => getProjectPage(project)}>
                         <td>{project.project_title}</td>
                         <td>{getPercentSold(project.realties)}</td>
                         <td className="text-center">

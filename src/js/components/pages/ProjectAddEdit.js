@@ -18,12 +18,11 @@ const ProjectAddEdit = (props) => {
     },[]);
 
 	const backToJprojects = () => {
-        document.getElementById('projectList').classList.remove("d-none");
-        document.getElementById('map-container').classList.remove("d-none");
-        document.getElementById('tools').classList.remove("d-none");
+        document.getElementById('projects').classList.remove("d-none");
 		document.getElementById('projectAdd').classList.add("d-none");
+		$("#projects").hide().fadeIn(500);
 		$('#moreInfos').removeClass('show');
-		onMoreInfos();
+		setMoreInfos({status: 0, label: "Plus d'infos", icon: "fas fa-angle-right"});
     }
 	
 	const onMoreInfos = () => {

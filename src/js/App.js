@@ -14,6 +14,7 @@ import ParamsPreload from "./components/pages/ParamsPreload";
 import SignIn from "./components/pages/SignIn";
 import Dashboard from './components/pages/Dashboard';
 import Projects from './components/pages/Projects';
+import Project from './components/pages/Project';
 import Realty from './components/pages/Realty';
 import Libraries from './components/pages/Libraries';
 import Clients from './components/pages/Clients';
@@ -82,6 +83,7 @@ function App(){
                                     <Route path="/login" exact component={SignIn} />
                                     <ProtectedRoute path="/" exact component={Dashboard} />
                                     <ProtectedRoute path="/projects" exact component={Projects} />
+                                    <ProtectedRoute path="/project" exact component={Project} />
                                     <ProtectedRoute path="/realty" exact component={Realty} />
                                     <ProtectedRoute path="/libraries" exact component={Libraries} />
                                     <ProtectedRoute path="/clients" exact component={Clients} />

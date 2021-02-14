@@ -76,7 +76,7 @@ const Navigation = (props) => {
                 <ul id="secondaryNav" className="list-unstyled components secondary-nav">
                     {secondaryNavData.map((secondaryNav, index)=>(
                         <li key={index}>
-                            <NavLink to={secondaryNav.href} activeClassName="active" >
+                            <NavLink to={secondaryNav.href} activeClassName="active">
                                 <i className={"fas " + secondaryNav.icon}/>
                                 <span>{t("nav." + secondaryNav.label)}</span>
                             </NavLink>
@@ -89,9 +89,8 @@ const Navigation = (props) => {
             </nav>
         );
     }else{
-        return ("")
+        return ("");
     }
-
 };
 
 export default Navigation;
