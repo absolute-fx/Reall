@@ -1,10 +1,9 @@
 const {app, BrowserWindow, ipcMain, Notification} = require("electron");
 const path = require('path');
-const  promiseIpc =  require('electron-promise-ipc');
+const promiseIpc =  require('electron-promise-ipc');
 const isDev = !app.isPackaged;
 const RCkMenu = require("electron").Menu;
 const RCMenuItems = require("electron").MenuItem;
-const autoUpdater = require('./src/core/AutoUpdate').autoUpdate;
 
 let win;
 let aU;
@@ -18,10 +17,10 @@ function createWindow(){
         icon: "icon.ico",
         backgroundColor: "white",
         webPreferences:{
-            nodeIntegration: false,
-            worldSafeExecuteJavaScript: true,
-            contextIsolation: true,
-            preload: path.join(__dirname, 'preload.js')
+            nodeIntegration: true,
+            //worldSafeExecuteJavaScript: true,
+            //contextIsolation: true,
+            //preload: path.join(__dirname, 'preload.js')
         }
     })
 

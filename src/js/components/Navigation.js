@@ -4,19 +4,28 @@ import {NavLink} from "react-router-dom";
 import {mainNavItems, secondaryNavItems} from "./navItems";
 import {UserContext} from "../contexts/UserContext";
 import {AppParamsContext} from "../contexts/AppParamsContext";
+import promiseIpc from 'electron-promise-ipc';
 
 const Navigation = (props) => {
 
     const{ user, setUser} = useContext(UserContext);
     const {appParams, setAppParams} = useContext(AppParamsContext);
-    const rootDir = electron.desktopFilesApi.getAppRootDir();
+    const rootDir = __dirname;
     
 
     const mainNavData = mainNavItems;
     const secondaryNavData = secondaryNavItems;
 
     const saveParams = async (isToglled) =>{
-        await electron.parametersApi.setAppParams([{node: "navToggled", value: isToglled}]);
+        //await electron.parametersApi.setAppParams([{node: "navToggled", value: isToglled}]);
+        let userDataPath;
+        promiseIpc.send('getUserDataPath').then(data =>{
+            userDataPath = data;
+            ManageParameters.setParameters(userDataPath ,[{node: "navToggled", value: isToglled}]).then(parameters =>{
+                //resolve(parameters);
+                console.log('SAVED');
+            });
+        });
     };
 
     const [active, setToggle] = useState("");

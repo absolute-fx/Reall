@@ -1,6 +1,8 @@
 import React, {useState, useMemo, useEffect} from 'react';
 import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import {setTranslations, setDefaultLanguage, setLanguage } from 'react-multi-lang';
+import promiseIpc from 'electron-promise-ipc';
+
 // LANGUAGES
 import fr from '../languages/fr.json';
 import nl from '../languages/nl.json';
@@ -33,6 +35,9 @@ import {LicenceContext} from "./contexts/LicenceContext";
 
 import Footer from "./components/Footer";
 
+// Manage parameters
+import ManageParameters from './components/ManageParameters.js';
+
 // TRANSLATIONS SETUP
 setTranslations({fr, nl, en});
 
@@ -40,8 +45,16 @@ setTranslations({fr, nl, en});
 function App(){
 
     const [appVersion, setAppVersion] = useState("");
+    /*
     const getAppVersion = async () => {
         setAppVersion(await electron.appDataApi.getAppVersion());
+    }*/
+
+    const getAppVersion = async () => {
+        //setAppVersion(await electron.appDataApi.getAppVersion());
+        promiseIpc.send('getAppVersion').then(data =>{
+            setAppVersion(data);
+        }); 
     }
 
     const [licence, setLicence] = useState(null);
@@ -49,7 +62,12 @@ function App(){
 
     const [appParams, setAppParams] = useState(null);
     const getParams = async () => {
-        setAppParams( await electron.parametersApi.getAppParameters());
+        //setAppParams( await electron.parametersApi.getAppParameters());
+        promiseIpc.send('getUserDataPath').then(userDataPath =>{
+            ManageParameters.getParameters(userDataPath).then(parameters =>{
+                setAppParams(parameters);
+            });
+        });
     }
     const appParamsProvider = useMemo(() => ({appParams, setAppParams}), [appParams, setAppParams]);
 
