@@ -1,4 +1,13 @@
 node_modules
 src/parameters.json
 .idea
+dist/electron/*
+dist/fonts/*
+build/*
+!build/icons
+!build/icon.ico
+!build/js
+!build/fonts
 src/styles/.sass-cache
+
+!.gitkeep

@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 // PAGES
 import Navigation from './components/Navigation';
 import LicenceCheck from "./components/pages/LicenceCheck";
+import Update from "./components/pages/Update";
 import ParamsPreload from "./components/pages/ParamsPreload";
 import SignIn from "./components/pages/SignIn";
 import Dashboard from './components/pages/Dashboard';
@@ -96,6 +97,7 @@ function App(){
                             <Navigation />
                             <main className= {`content ${user ? 'padding-content': ''}`}>
                                 <Switch>
+                                    <Route path="/update" exact component={Update} />
                                     <Route path="/licence" exact component={LicenceCheck} />
                                     <Route path="/params" exact component={ParamsPreload} />
                                     <Route path="/login" exact component={SignIn} />
