@@ -103,6 +103,9 @@ let rendererConfig = {
         path: path.join(__dirname, '../dist/electron')
     },
     resolve: {
+        alias: {
+            '@': path.join(__dirname, '../src/renderer'),
+        },
         extensions: ['.js', '.json', '.css', '.node']
     }
 }
