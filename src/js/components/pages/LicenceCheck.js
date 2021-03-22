@@ -4,6 +4,8 @@ import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
 import {useHistory} from "react-router-dom";
+import promiseIpc from 'electron-promise-ipc';
+import ManageParameters from '../ManageParameters';
 
 const LicenceCheck = () => {
 
@@ -43,7 +45,13 @@ const LicenceCheck = () => {
     }
 
     const saveParams = async () =>{
-        await electron.parametersApi.setAppParams([{node: "user.licence_key", value:licenceKey}]);
+        let userDataPath;
+        promiseIpc.send('getUserDataPath').then(data =>{
+            userDataPath = data;
+            ManageParameters.setParameters(userDataPath ,[{node: "user.licence_key", value:licenceKey}]).then(parameters =>{
+
+            });
+        });
     }
 
     useEffect(() => {

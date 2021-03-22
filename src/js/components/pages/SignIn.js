@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useTranslation} from "react-multi-lang";
 import {useHistory} from "react-router-dom";
+import promiseIpc from 'electron-promise-ipc';
 // AUTH
 import auth from "../auth";
 // CONTEXTS
@@ -8,6 +9,9 @@ import {LicenceContext} from "../../contexts/LicenceContext";
 import {UserContext} from "../../contexts/UserContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
+
+// Manage parameters
+import ManageParameters from '../ManageParameters.js';
 
 const SignIn = (props) => {
 
@@ -41,7 +45,12 @@ const SignIn = (props) => {
 
     const saveParams = async () =>{
         const pass = autoConnect ? password: "";
-        await electron.parametersApi.setAppParams([{node: "user.password", value: pass}, {node: "user.login", value:username},{node: "user.auto_connect", value: autoConnect}]);
+        promiseIpc.send('getUserDataPath').then(data =>{
+            userDataPath = data;
+            ManageParameters.setParameters(userDataPath ,[{node: "user.password", value: pass}, {node: "user.login", value:username},{node: "user.auto_connect", value: autoConnect}]).then(parameters =>{
+                
+            });
+        });
     }
 
     useEffect(()=>{

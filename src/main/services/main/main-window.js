@@ -24,6 +24,7 @@ function createMainWindow(){
         show: true,
         webPreferences:{
             nodeIntegration: true,
+            webSecurity: false,
             //worldSafeExecuteJavaScript: true,
             contextIsolation: false,
             //preload: path.join(__dirname, 'preload.js')
