@@ -6,6 +6,9 @@ import {UserContext} from "../contexts/UserContext";
 import {AppParamsContext} from "../contexts/AppParamsContext";
 import promiseIpc from 'electron-promise-ipc';
 
+// Manage parameters
+import ManageParameters from '../components/ManageParameters';
+
 const Navigation = (props) => {
 
     const{ user, setUser} = useContext(UserContext);

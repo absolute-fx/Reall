@@ -45,8 +45,7 @@ const SignIn = (props) => {
 
     const saveParams = async () =>{
         const pass = autoConnect ? password: "";
-        promiseIpc.send('getUserDataPath').then(data =>{
-            userDataPath = data;
+        promiseIpc.send('getUserDataPath').then(userDataPath =>{
             ManageParameters.setParameters(userDataPath ,[{node: "user.password", value: pass}, {node: "user.login", value:username},{node: "user.auto_connect", value: autoConnect}]).then(parameters =>{
                 
             });
