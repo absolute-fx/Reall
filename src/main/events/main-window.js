@@ -1,7 +1,7 @@
-import {app} from 'electron'
+import {app} from 'electron';
 
-const promiseIpc =  require('electron-promise-ipc')
-const log = require('electron-log')
+const promiseIpc =  require('electron-promise-ipc');
+const log = require('electron-log');
 
 
 promiseIpc.on('closeWindow', () => {
