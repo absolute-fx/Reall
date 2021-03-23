@@ -1,4 +1,5 @@
 import { BrowserWindow, Menu, MenuItem } from 'electron';
+import {app} from 'electron';
 const log = require('electron-log');
 
 let mainWindow = null;
@@ -35,24 +36,12 @@ function createMainWindow(){
 
     const ctxMenu = new Menu();
     ctxMenu.append(new MenuItem(
-        {
-            label: 'Debug',
-            click: () => {
-                mainWindow.webContents.openDevTools();
-            }
-        }));
-    ctxMenu.append(new MenuItem(
-        {
-            label: 'Add realty',
-            click: () => {
-                console.log('hello world II')
-            }
-        }));
-
-    ctxMenu.append(new MenuItem(
-        {
-            label: mainWindow.webContents.getURL()
-        }));
+    {
+        label: 'Debug',
+        click: () => {
+            mainWindow.webContents.openDevTools();
+        }
+    }));
 
     mainWindow.webContents.on('context-menu', (e, params) => {
         ctxMenu.popup(mainWindow, params.x, params.y)
@@ -60,9 +49,12 @@ function createMainWindow(){
 
 
     mainWindow.loadURL(mainWinURL);
+
     mainWindow.on('closed', () => {
         console.log('main window closed');
+        app.quit();
     });
+    
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
     });
