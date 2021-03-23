@@ -19,7 +19,7 @@ let rendererConfig = {
         minimizer: [new TerserPlugin()],
     },
     entry: {
-        renderer: path.join(__dirname, '../src/js/index.js')
+        renderer: path.join(__dirname, '../src/renderer/index.js')
     },
     externals: [
         ...Object.keys(dependencies || {}),
@@ -74,7 +74,7 @@ let rendererConfig = {
                 use: {
                     loader: 'file-loader',
                     options: {
-                        name: '../fonts/[name].[ext]'
+                        name: '../src/renderer/fonts/[name].[ext]'
                     }
                 }
             }

@@ -43,15 +43,8 @@
         ]
       },
       {
-        "from": "src/styles/font-awesome",
-        "to": "dist/vendor/font-awesome",
-        "filter": [
-          "**/*"
-        ]
-      },
-      {
-        "from": "src/styles/webfonts",
-        "to": "dist/vendor/webfonts",
+        "from": "src/renderer/fonts",
+        "to": "dist/src/renderer/fonts",
         "filter": [
           "**/*"
         ]
@@ -106,6 +99,7 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "axios": "^0.21.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^7.1.4",
@@ -139,6 +133,7 @@
     "style-loader": "^2.0.0",
     "ttf-loader": "^1.0.2",
     "ttf2woff": "^2.0.2",
+    "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4",
