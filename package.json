@@ -26,6 +26,8 @@
     },
     "files": [
       "dist/electron/**/*",
+      "dist/fonts/**/*",
+      "dist/vendor/**/*",
       {
         "from": "resources",
         "to": "resources",
@@ -34,8 +36,22 @@
         ]
       },
       {
-        "from": "src/main/locales/lang",
+        "from": "src/locales/lang",
         "to": "dist/electron/lang",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/styles/font-awesome",
+        "to": "dist/vendor/font-awesome",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/styles/webfonts",
+        "to": "dist/vendor/webfonts",
         "filter": [
           "**/*"
         ]
