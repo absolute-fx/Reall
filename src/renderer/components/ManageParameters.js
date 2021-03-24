@@ -52,60 +52,65 @@ class ManageParameters{
     {
         let appParameters;
         appParameters = {
-            version: "1.0.0",
-            navToggled: false,
-            system: {
-                root_path: '',
-                upload_path: '',
-                cloud_library_path:"",
-                projects_dirs: {
-                    default: {libraries: 'Bibliothèque', realties: 'Biens'},
-                    user_defined: []
+            "version": "1.0.0",
+            "navToggled": true,
+            "system": {
+              "root_path": "",
+              "upload_path": "",
+              "cloud_library_path": "",
+              "projects_dirs": {
+                "default": {
+                  "libraries": "Bibliothèque",
+                  "realties": "Biens"
                 },
-                realties_dirs: {
-                    default: {library: 'Bibliothèque'},
-                    user_defined: []
+                "user_defined": []
+              },
+              "realties_dirs": {
+                "default": {
+                  "library": "Bibliothèque"
                 },
-                resize_img_delay_ratio: 0.1
+                "user_defined": []
+              },
+              "resize_img_delay_ratio": 0.1
             },
-            external_api: {
-              gm_key: ""
+            "external_api": {
+              "gm_key": ""
             },
-            user:{
-                login: '',
-                password: '',
-                auto_connect: false,
-                licence_key: '',
-                language: "en"
+            "user": {
+              "login": "",
+              "password": "",
+              "auto_connect": false,
+              "licence_key": "",
+              "language": "fr"
             },
-            project: {
-                project_phases: [],
-                projects_categories: []
+            "project": {
+              "project_phases": [],
+              "projects_categories": []
             },
-            realty:{
-                realties_categories: []
+            "realty": {
+              "realties_categories": []
             },
-            logs:{
-                max_logs_display: 200,
-                max_logs_stored: 10000
+            "logs": {
+              "max_logs_display": 200,
+              "max_logs_stored": 10000
             },
-            libraries:{
-                images:{
-                    thumb: {
-                        width: 200,
-                        height: 200,
-                        quality: 100,
-                        suffix: '_thumb'
-                    },
-                    web_default:{
-                        width: 1920,
-                        height: 1080,
-                        quality: 100,
-                        suffix: '_web'
-                    }
+            "libraries": {
+              "images": {
+                "thumb": {
+                  "width": 200,
+                  "height": 200,
+                  "quality": 100,
+                  "suffix": "_thumb"
+                },
+                "web_default": {
+                  "width": 1920,
+                  "height": 1080,
+                  "quality": 100,
+                  "suffix": "_web"
                 }
+              }
             }
-        };
+          };
         return appParameters;
     }
 
