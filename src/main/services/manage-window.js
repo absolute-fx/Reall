@@ -1,6 +1,6 @@
 import MainWindow from './main/main-window';
 import UpdateWindow from './update/update-window';
-import UpdateService from './update/update-service';
+//import UpdateService from './update/update-service'; // auto check update timer
 
 const log = require('electron-log');
 
@@ -11,7 +11,7 @@ async function createWindow () {
     MainWindow.createMainWindow();
     UpdateWindow.destroyUpdateWindow();
 
-    UpdateService.checkAutoUpdate();
+    //UpdateService.checkAutoUpdate();
 }
 
 export default {

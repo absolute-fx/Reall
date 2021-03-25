@@ -39,7 +39,7 @@ const Update = () => {
         <>
             <div className="update-logo">reall<small className="text-primary">©</small></div>
             <div className="update-container">
-                <p id="message" className="mt-5 text-center">{updateMessage}</p>
+                <p id="message" className="mt-5 text-center" dangerouslySetInnerHTML={{__html: updateMessage}}></p>
                 <div className={progressVisibility}>
                     <ProgressBar done={progress} />
                 </div>

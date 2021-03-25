@@ -22,7 +22,7 @@ function createUpdateWindow () {
         minWidth: 500,
         minHeight: 500,
         icon: "icon.ico",
-        //resizable: false,
+        resizable: false,
         show: true,
         webPreferences: {
             nodeIntegration: true,
