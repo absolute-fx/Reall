@@ -27,11 +27,10 @@ function createMainWindow(){
             nodeIntegration: true,
             webSecurity: false,
             //worldSafeExecuteJavaScript: true,
-            contextIsolation: false,
-            //preload: path.join(__dirname, 'preload.js')
+            contextIsolation: false
         }
-    })
-
+    });
+    
     mainWindow.removeMenu();
 
     const ctxMenu = new Menu();
@@ -54,7 +53,7 @@ function createMainWindow(){
         console.log('main window closed');
         app.quit();
     });
-    
+
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
     });

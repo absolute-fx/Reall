@@ -81,7 +81,7 @@ class ManageParameters{
               "password": "",
               "auto_connect": false,
               "licence_key": "",
-              "language": "fr"
+              "language": "en"
             },
             "project": {
               "project_phases": [],

@@ -1,19 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
     <meta http-equiv="Content-Security-Policy: script-src maps.googleapis.com;img-src data: maps.gstatic.com *.googleapis.com *.ggpht">
-    <title>Reall© alpha 1.0.0</title>
+    <title>Reall© alpha 0.1.0</title>
     <% if (htmlWebpackPlugin.options.nodeModules) { %>
       <script>
         require('module').globalPaths.push('<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>');
       </script>
     <% } %>
-    <!-- <link rel="stylesheet" href="../vendor/font-awesome/fontawesome.css">
-    <link rel="stylesheet" href="../vendor/font-awesome/solid.css"> -->
 </head>
 <body>
     <div id="app" class="wrapper"></div>

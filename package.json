@@ -1,7 +1,7 @@
 {
   "name": "reall",
   "author": "AfxLab",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Real Esate Manager & Services",
   "main": "dist/electron/main.js",
   "repository": {
@@ -61,7 +61,7 @@
       "target": "nsis"
     },
     "nsis": {
-      "oneClick": false,
+      "oneClick": true,
       "perMachine": true,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": false,

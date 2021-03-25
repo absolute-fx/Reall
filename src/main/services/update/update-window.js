@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu } from 'electron';
+import { BrowserWindow, Menu, MenuItem } from 'electron';
 const log = require('electron-log');
 
 let updateWindow = null;
@@ -16,11 +16,13 @@ function createUpdateWindow () {
     log.info('Create Update Window');
 
     updateWindow = new BrowserWindow({
-        width: 1550,
-        height: 1040,
-        minWidth: 1550,
-        minHeight: 1060,
-        resizable: false,
+        width: 500,
+        height: 500,
+        frame: false,
+        minWidth: 500,
+        minHeight: 500,
+        icon: "icon.ico",
+        //resizable: false,
         show: true,
         webPreferences: {
             nodeIntegration: true,
@@ -36,6 +38,19 @@ function createUpdateWindow () {
     });
     updateWindow.once('ready-to-show', () => {
         updateWindow.show();
+    });
+
+    const ctxMenu = new Menu();
+    ctxMenu.append(new MenuItem(
+    {
+        label: 'Debug',
+        click: () => {
+            updateWindow.webContents.openDevTools();
+        }
+    }));
+
+    updateWindow.webContents.on('context-menu', (e, params) => {
+        ctxMenu.popup(updateWindow, params.x, params.y)
     });
 }
 

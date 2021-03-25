@@ -54,6 +54,7 @@ autoUpdater.on('download-progress', progress => {
     log.info('download-progress');
     if (UpdateWindow.getUpdateWindow() != null) {
         log.info('download-progress-upd');
+        log.info(progress);
         UpdateWindow.getUpdateWindow().webContents.send('getAutoUpdatePercentage', progress.percent);
         UpdateWindow.getUpdateWindow().setProgressBar(progress.percent / progress.total);
     }

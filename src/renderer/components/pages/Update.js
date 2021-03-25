@@ -1,59 +1,53 @@
-import React, { useEffect } from "react";
+import electronPackager from "electron-packager";
+import React, { useState ,useEffect } from "react";
+import ProgressBar from "../ProgressBar";
+import {ipcRenderer} from "electron";
+
 const promiseIpc =  require('electron-promise-ipc');
 const log = require('electron-log');
 
 
 const Update = () => {
+
+    const [progress, setProgress] = useState(0);
+    const [updateMessage, setUpdateMessage] = useState('Checking for update...');
+    //const [launcherRady, setLauncherRady] = useState(false);
+    const [progressVisibility, setProgressVisibility] = useState('d-none');
+
     useEffect(() => {
-        promiseIpc.send('checkForUpdates').then(() => {
+        setTimeout(function(){ 
+            promiseIpc.send('checkForUpdates').then(() => {}); 
+        }, 2000);
+
+        ipcRenderer.on('getAutoUpdatePercentage', (event, arg) => {
+            log.info('Renderer getAutoUpdatePercentage', arg);
+            setUpdateMessage("We have cooked some new cool stuffs for you!<br/><small>Downloading the new version of reall©...</small>");
+            setProgressVisibility('');
+            setProgress(arg);
         });
 
+        ipcRenderer.on('updateDown', () => {
+            setProgress(100);
+            //setLauncherRady(true);
+            setUpdateMessage("Restarting and install...");
+            ipcRenderer.send('quitAndInstallUpdate');
+        });
 
-        // ipcRenderer.on('getAutoUpdatePercentage', (event, arg) => {
-        //     log.info('Renderer getAutoUpdatePercentage', arg);
-        //     this.updateLauncherReady = false;
-        //     this.downloadPercentage = arg;
-        // });
-        //
-        // ipcRenderer.on('updateDown', () => {
-        //     this.downloadPercentage = 0;
-        //     this.updateLauncherReady = true;
-        //     ipcRenderer.send('quitAndInstallUpdate');
-        // });
     },[]);
 
     return(
         <>
-            <div className="sign-in-logo">reall<small className="text-primary">©</small></div>
-            <div className={"sign-in-container "}>
-
-                {/*<div className="panel update-status">*/}
-                {/*    <div v-if="downloadPercentage" className="download-bar">*/}
-                {/*        <div className="info">*/}
-                {/*            Téléchargement en cours*/}
-                {/*            <div className="wave">*/}
-                {/*                <span className="dot"></span>*/}
-                {/*                <span className="dot"></span>*/}
-                {/*                <span className="dot"></span>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className="download-progress">*/}
-                {/*            <div className="download-progress-value" style="{width: downloadPercentage  + '%'}"></div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*    <div v-else-if="updateLauncherReady">*/}
-                {/*        <div className="info">Redémarrage</div>*/}
-                {/*        <img className="download-icon-update" alt="finish" src="~@/assets/icons/finish-launcher-update.gif"/>*/}
-                {/*    </div>*/}
-                {/*    <div v-else>*/}
-                {/*        Vérification de mise à jour*/}
-                {/*        <div className="wave">*/}
-                {/*            <span className="dot"></span>*/}
-                {/*            <span className="dot"></span>*/}
-                {/*            <span className="dot"></span>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+            <div className="update-logo">reall<small className="text-primary">©</small></div>
+            <div className="update-container">
+                <p id="message" className="mt-5 text-center">{updateMessage}</p>
+                <div className={progressVisibility}>
+                    <ProgressBar done={progress} />
+                </div>
+                <div className="wave">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                </div>
             </div>
         </>
     )
