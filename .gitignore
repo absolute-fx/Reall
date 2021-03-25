@@ -5,7 +5,7 @@ dist/electron/*
 dist/fonts/*
 build/*
 !build/icons
-!build/icon.ico
+!build/icon.*
 !build/js
 !build/fonts
 src/styles/.sass-cache
