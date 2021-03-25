@@ -1,0 +1,50 @@
+on: push
+name: 🚀 Deploy app on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest ]
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2.3.2
+
+    - name: Use Node.js 12
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+
+    - name: 🔨 Build Project
+      run: |
+        npm install
+        npm run build
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ftp-reall.alwaysdata.net
+        username: reall_ftp
+        password: ${{ secrets.password }}
+        local-dir: ./build/
+        server-dir: ./
+        exclude: fonts/**
+          - js/**
+          - fonts/
+          - js/
+          - fonts
+          - js
+          - mac
+          - mac/
+          - mac/**
+          - mac/**/*
+          - *-unpacked
+          - *-unpacked/
+          - *-unpacked/**
+          - *-unpacked/**/*
+          - reall-*/**
+          - reall-*/**/*
+          - reall-*/
+          - reall-*
+          - icon*
