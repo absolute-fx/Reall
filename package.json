@@ -48,6 +48,13 @@
         "filter": [
           "**/*"
         ]
+      },
+      {
+        "from": "src/renderer/images",
+        "to": "dist/electron/src/renderer/images",
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "publish": [
