@@ -14,7 +14,7 @@ const Navigation = (props) => {
     const{ user, setUser} = useContext(UserContext);
     const {appParams, setAppParams} = useContext(AppParamsContext);
     const rootDir = __dirname;
-    
+
 
     const mainNavData = mainNavItems;
     const secondaryNavData = secondaryNavItems;
@@ -60,7 +60,7 @@ const Navigation = (props) => {
                 <div className="user-box">
                     <div className="row side-user-max">
                         <div className="col-md-4">
-                            <img src={`${rootDir}/src/images/user_avatar.jpg`}
+                            <img src={`src/renderer/images/user_avatar.jpg`}
                                  className="img-thumbnail rounded-circle avatar"
                                  alt="avatar"/>
                         </div>
@@ -70,7 +70,7 @@ const Navigation = (props) => {
                         </div>
                     </div>
                     <div className="row side-user-min">
-                        <img src={`${rootDir}/src/images/user_avatar.jpg`}
+                        <img src={`src/renderer/images/user_avatar.jpg`}
                              className="img-thumbnail rounded-circle avatar"
                              alt="avatar"/>
                     </div>
