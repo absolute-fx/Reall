@@ -54,11 +54,11 @@ let rendererConfig = {
                 ],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                test: /\.(png|jpeg|jpg|gif|svg)(\?.*)?$/,
                 use: {
                     loader: 'url-loader',
                     options: {
-                        name: 'imgs/[name]--[folder].[ext]'
+                        name: '../src/renderer/images/[name].[ext]'
                     }
                 }
             },
