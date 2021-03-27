@@ -33,5 +33,20 @@
     "sales": "Uitverkoop",
     "map": "Kaart",
     "tools": "Gereedschap"
+  },
+  "parameters": {
+    "title": "Parameters",
+    "api_url": "API url",
+    "licence_key": "Licentiesleutel",
+    "google_key": "Google API sleutel",
+    "user": "Gebruiker",
+    "firstname": "Voornaam",
+    "lastname": "Achternaam",
+    "email": "Email",
+    "interface": "Koppel",
+    "theme": "Thema",
+    "dark": "Donker",
+    "light": "Licht",
+    "language": "Taal"
   }
 }

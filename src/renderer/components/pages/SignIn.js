@@ -11,7 +11,7 @@ import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 
 // Manage parameters
-import ManageParameters from '../ManageParameters.js';
+import ManageParameters from '../services/ManageParameters.js';
 
 const SignIn = (props) => {
 

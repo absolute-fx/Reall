@@ -33,5 +33,20 @@
     "sales": "Vente",
     "map": "Carte",
     "tools": "Outils"
+  },
+  "parameters": {
+    "title": "Paramètres",
+    "api_url": "Adresse de l'API",
+    "licence_key": "Clé de licence",
+    "google_key": "Clé API Google",
+    "user": "Utilisateur",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "email": "Email",
+    "interface": "Interface",
+    "theme": "Thème",
+    "dark": "Foncé",
+    "light": "Clair",
+    "language": "Langue"
   }
 }

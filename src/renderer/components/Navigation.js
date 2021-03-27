@@ -7,7 +7,7 @@ import {AppParamsContext} from "../contexts/AppParamsContext";
 import promiseIpc from 'electron-promise-ipc';
 
 // Manage parameters
-import ManageParameters from '../components/ManageParameters';
+import ManageParameters from '../components/services/ManageParameters';
 
 const Navigation = (props) => {
 

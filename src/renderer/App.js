@@ -37,7 +37,7 @@ import {LicenceContext} from "./contexts/LicenceContext";
 import Footer from "./components/Footer";
 
 // Manage parameters
-import ManageParameters from './components/ManageParameters.js';
+import ManageParameters from './components/services/ManageParameters.js';
 
 // TRANSLATIONS SETUP
 setTranslations({fr, nl, en});
@@ -84,7 +84,8 @@ function App(){
 
     useEffect(() => {
         if(appParams){
-            setDefaultLanguage(appParams.user.language);
+            setDefaultLanguage(appParams.application.default_language);
+            setLanguage(appParams.user.language);
         }
     }, [appParams])
 

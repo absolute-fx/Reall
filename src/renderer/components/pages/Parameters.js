@@ -1,4 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
+import {useTranslation, setLanguage, getLanguage} from 'react-multi-lang';
+import ManageParameters from '../services/ManageParameters';
+
 // CONTEXTS
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
@@ -9,12 +12,24 @@ const Parameters = (props) => {
     const {licence, setLicence} = useContext(LicenceContext);
     const{ user, setUser} = useContext(UserContext);
 
+    const changeLanguage = (e) => {
+        setLanguage(e.target.value);
+    };
+
+    const t = useTranslation();
+
+    useEffect(() => {
+        console.log(appParams.application);
+    }, [])
+
+    
+
     return(
         <div id="parameters" className="row h-100">    
             <div className="col-md-6">
                 <div className="panel panel-100" id="parameters">
                     <header>
-                        <h1 className="d-inline-block">Parameters</h1>
+                        <h1 className="d-inline-block">{t("parameters.title")}</h1>
                     </header>
                     <div className="panel-separator" />
                     <div className="panel-content">
@@ -22,17 +37,17 @@ const Parameters = (props) => {
                             <div className="container-fluid">
                                 <div className="row">
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="api_url">API url</label>
+                                        <label htmlFor="api_url">{t("parameters.api_url")}</label>
                                         <input type="text" className="form-control form-control-sm"onChange={setLicence}  value={licence.api_link} id="api_url" placeholder="" disabled/>
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="licence_key">Licence key</label>
+                                        <label htmlFor="licence_key">{t("parameters.licence_key")}</label>
                                         <input type="text" className="form-control form-control-sm"onChange={setLicence}  value={licence.licence_key} id="licence_key" placeholder="" disabled/>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="form-group col">
-                                        <label htmlFor="google_key">Google API key</label>
+                                        <label htmlFor="google_key">{t("parameters.google_key")}</label>
                                         <input type="text" className="form-control form-control-sm" onChange={setAppParams} value={appParams.external_api.gm_key} id="google_key" placeholder=""/>
                                     </div>
                                 </div>
@@ -44,7 +59,7 @@ const Parameters = (props) => {
             <div className="col-md-6" id="map-container">
                 <div className="panel">
                     <header>
-                        <h1>User</h1>
+                        <h1>{t("parameters.user")}</h1>
                     </header>
                     <div className="panel-separator" />
                     <div className="panel-content">
@@ -52,17 +67,17 @@ const Parameters = (props) => {
                             <div className="container-fluid">
                                 <div className="row">
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="firstname">Firstname</label>
+                                        <label htmlFor="firstname">{t("parameters.firstname")}</label>
                                         <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.firstname} id="firstname" placeholder="" />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="lastname">Lastname</label>
+                                        <label htmlFor="lastname">{t("parameters.lastname")}</label>
                                         <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.lastname} id="lastname" placeholder="" />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="form-group col">
-                                        <label htmlFor="email">Email</label>
+                                        <label htmlFor="email">{t("parameters.email")}</label>
                                         <input type="text" className="form-control form-control-sm" onChange={setUser} value={user.email} id="email" placeholder="" disabled/>
                                     </div>
                                 </div>
@@ -72,7 +87,7 @@ const Parameters = (props) => {
                 </div>
                 <div className="panel ps-t" id="tools">
                     <header>
-                        <h1>Interface</h1>
+                        <h1>{t("parameters.interface")}</h1>
                     </header>
                     <div className="panel-separator" />
                     <div className="panel-content">
@@ -80,18 +95,18 @@ const Parameters = (props) => {
                             <div className="container-fluid">
                                 <div className="row">
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="theme">Theme</label>
+                                        <label htmlFor="theme">{t("parameters.theme")}</label>
                                         <select className="form-control form-control-sm" id="theme">
-                                            <option>Light</option>
-                                            <option>Dark</option>
+                                            <option>{t("parameters.light")}</option>
+                                            <option>{t("parameters.dark")}</option>
                                         </select>
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="language">Language</label>
-                                        <select className="form-control form-control-sm" id="theme">
-                                            <option>English</option>
-                                            <option>Netherlands</option>
-                                            <option>Français</option>
+                                        <label htmlFor="language">{t("parameters.language")}</label>
+                                        <select className="form-control form-control-sm" id="theme" defaultValue={getLanguage()} onChange={changeLanguage}>
+                                            {appParams.application.languages.map((value, index) => {
+                                                return <option key={index} value={value.code}>{value.label}</option>
+                                            })}
                                         </select>
                                     </div>
                                 </div>

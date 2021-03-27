@@ -5,7 +5,7 @@ import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
 import {useHistory} from "react-router-dom";
 import promiseIpc from 'electron-promise-ipc';
-import ManageParameters from '../ManageParameters';
+import ManageParameters from '../services/ManageParameters';
 
 const LicenceCheck = () => {
 

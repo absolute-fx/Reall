@@ -33,5 +33,20 @@
     "sales": "Sales",
     "map": "Map",
     "tools": "Tools"
+  },
+  "parameters": {
+    "title": "Parameters",
+    "api_url": "API url",
+    "licence_key": "Licence key",
+    "google_key": "Google API key",
+    "user": "User",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "email": "Email",
+    "interface": "Interface",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "language": "Language"
   }
 }
