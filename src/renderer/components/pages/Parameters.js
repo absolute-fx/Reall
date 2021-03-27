@@ -52,18 +52,18 @@ const Parameters = (props) => {
                             <div className="container-fluid">
                                 <div className="row">
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="api_url">Firstname</label>
-                                        <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.firstname} id="api_url" placeholder="" />
+                                        <label htmlFor="firstname">Firstname</label>
+                                        <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.firstname} id="firstname" placeholder="" />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="licence_key">Lastname</label>
-                                        <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.lastname} id="licence_key" placeholder="" />
+                                        <label htmlFor="lastname">Lastname</label>
+                                        <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.lastname} id="lastname" placeholder="" />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="form-group col">
-                                        <label htmlFor="google_key">Email</label>
-                                        <input type="text" className="form-control form-control-sm" onChange={setUser} value={user.email} id="google_key" placeholder="" disabled/>
+                                        <label htmlFor="email">Email</label>
+                                        <input type="text" className="form-control form-control-sm" onChange={setUser} value={user.email} id="email" placeholder="" disabled/>
                                     </div>
                                 </div>
                             </div>
