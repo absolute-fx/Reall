@@ -1,6 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useTranslation, setLanguage, getLanguage} from 'react-multi-lang';
+import promiseIpc from 'electron-promise-ipc';
 import ManageParameters from '../services/ManageParameters';
+
+const log = require('electron-log');
 
 // CONTEXTS
 import {AppParamsContext} from "../../contexts/AppParamsContext";
@@ -14,6 +17,11 @@ const Parameters = (props) => {
 
     const changeLanguage = (e) => {
         setLanguage(e.target.value);
+        promiseIpc.send('getUserDataPath').then(userDataPath =>{
+            ManageParameters.setParameters(userDataPath ,[{node: "user.language", value: e.target.value}]).then(parameters =>{
+                log.info('Language changed to ' + e.target.value);
+            });
+        });
     };
 
     const t = useTranslation();
