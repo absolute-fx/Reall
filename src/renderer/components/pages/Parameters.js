@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useTranslation, setLanguage, getLanguage} from 'react-multi-lang';
 import promiseIpc from 'electron-promise-ipc';
+import {ipcRenderer} from "electron";
 import ManageParameters from '../services/ManageParameters';
 
 const log = require('electron-log');
@@ -30,7 +31,42 @@ const Parameters = (props) => {
         console.log(appParams.application);
     }, [])
 
+    const changeUserInfos = (e) => {
+        //console.log(e.target.id);
+        // call to reall server?
+        setUser(prevState => (
+            {
+                ...prevState,
+                [e.target.id]: e.target.value
+            }
+        ));
+        /*
+        ManageParameters.setParameters(appParams.system.root_path ,[{node: "user." + e.target.id, value: e.target.value}]).then(parameters =>{
+            log.info( e.target.id + ' changed to ' + e.target.value);
+        });*/
+    }
+
+    const changeGmKey = (e) => {
+        let params = {...appParams};
+        params.external_api.gm_key = e.target.value;
+        setAppParams(params);
+        ManageParameters.setParameters(appParams.system.root_path ,[{node: "external_api.gm_key", value: e.target.value}]).then(parameters =>{
+            log.info( e.target.id + ' changed to ' + e.target.value);
+        });
+    }
     
+    const changeAvatar = async (e) => {
+        e.preventDefault();
+        promiseIpc.send('setAvatar').then(avatar =>{
+            //console.log('AVATAR', avatar);
+        });
+    }
+
+    useEffect(()=>{
+        ipcRenderer.on('avatarChanged', (event, arg) => {
+            console.log("VUE", arg);
+        });
+    }, []);
 
     return(
         <div id="parameters" className="row h-100">    
@@ -56,7 +92,7 @@ const Parameters = (props) => {
                                 <div className="row">
                                     <div className="form-group col">
                                         <label htmlFor="google_key">{t("parameters.google_key")}</label>
-                                        <input type="text" className="form-control form-control-sm" onChange={setAppParams} value={appParams.external_api.gm_key} id="google_key" placeholder=""/>
+                                        <input type="text" className="form-control form-control-sm" onChange={changeGmKey} value={appParams.external_api.gm_key} id="google_key" placeholder=""/>
                                     </div>
                                 </div>
                             </div>
@@ -76,17 +112,22 @@ const Parameters = (props) => {
                                 <div className="row">
                                     <div className="form-group col-md-6">
                                         <label htmlFor="firstname">{t("parameters.firstname")}</label>
-                                        <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.firstname} id="firstname" placeholder="" />
+                                        <input type="text" className="form-control form-control-sm"onChange={changeUserInfos}  value={user.firstname} id="firstname" placeholder="" />
                                     </div>
                                     <div className="form-group col-md-6">
                                         <label htmlFor="lastname">{t("parameters.lastname")}</label>
-                                        <input type="text" className="form-control form-control-sm"onChange={setUser}  value={user.lastname} id="lastname" placeholder="" />
+                                        <input type="text" className="form-control form-control-sm"onChange={changeUserInfos}  value={user.lastname} id="lastname" placeholder="" />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="form-group col">
                                         <label htmlFor="email">{t("parameters.email")}</label>
-                                        <input type="text" className="form-control form-control-sm" onChange={setUser} value={user.email} id="email" placeholder="" disabled/>
+                                        <input type="text" className="form-control form-control-sm" onChange={changeUserInfos} value={user.email} id="email" placeholder="" disabled/>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="form-group col">
+                                        <button className="btn-secondary" onClick={changeAvatar}><i className="fas fa-user mr-2"></i>Avatar</button>
                                     </div>
                                 </div>
                             </div>

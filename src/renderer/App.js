@@ -66,6 +66,7 @@ function App(){
         //setAppParams( await electron.parametersApi.getAppParameters());
         promiseIpc.send('getUserDataPath').then(userDataPath =>{
             ManageParameters.getParameters(userDataPath).then(parameters =>{
+                parameters.system.root_path = userDataPath;
                 setAppParams(parameters);
             });
         });

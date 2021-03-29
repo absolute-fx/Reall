@@ -1,13 +1,17 @@
 import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import promiseIpc from 'electron-promise-ipc';
+import ManageParameters from '../services/ManageParameters';
 // AUTH
-import auth from '../auth';
+import auth from '../services/auth';
 // CONTEXTS
 import {UserContext} from "../../contexts/UserContext";
 import {AppParamsContext} from "../../contexts/AppParamsContext";
 import {FooterLoaderContext} from "../../contexts/FooterLoaderContext";
 import {LicenceContext} from "../../contexts/LicenceContext";
 import { useState } from "react";
+
+const log = require('electron-log');
 
 const ParamsPreload = () => {
 
@@ -18,7 +22,12 @@ const ParamsPreload = () => {
     let history = useHistory();
 
     const saveParams = async () =>{
-        await electron.parametersApi.setAppParams([{node: "user.auto_connect", value: false}]);
+        //await electron.parametersApi.setAppParams([{node: "user.auto_connect", value: false}]);
+        promiseIpc.send('getUserDataPath').then(userDataPath =>{
+            ManageParameters.setParameters(userDataPath ,[{node: "user.auto_connect", value: false}]).then(parameters =>{
+                log.info('No login and pass');
+            });
+        });
     };
 
     const getUser = async (api, data) => {
@@ -31,9 +40,6 @@ const ParamsPreload = () => {
         }else{
             console.log(user_data)
             setFooterLoader({active: true, message: user_data.reason, icon: "fa fa-exclamation-circle text-danger"});
-            /* saveParams().then(() => {
-                history.push("/login");
-            }); */
             history.push("/login");
         }
     } 

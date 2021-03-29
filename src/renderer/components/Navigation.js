@@ -46,7 +46,7 @@ const Navigation = (props) => {
 
     const t = useTranslation();
 
-    if(user){
+    if(user && user.auth){
 
         const userName = user.firstname;
         const userRole = user.roles[0].name;

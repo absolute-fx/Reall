@@ -20,7 +20,7 @@ const Update = () => {
         }, 2000);
 
         ipcRenderer.on('getAutoUpdatePercentage', (event, arg) => {
-            log.info('Renderer getAutoUpdatePercentage', Math.round(arg));
+            //log.info('Renderer getAutoUpdatePercentage', Math.round(arg));
             setUpdateMessage("We have cooked some new cool stuffs for you!<br/><small>Downloading the new version of reall©...</small>");
             setProgressVisibility('');
             setProgress(Math.round(arg));

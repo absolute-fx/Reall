@@ -3,7 +3,7 @@ import {useTranslation} from "react-multi-lang";
 import {useHistory} from "react-router-dom";
 import promiseIpc from 'electron-promise-ipc';
 // AUTH
-import auth from "../auth";
+import auth from '../services/auth';
 // CONTEXTS
 import {LicenceContext} from "../../contexts/LicenceContext";
 import {UserContext} from "../../contexts/UserContext";
