@@ -1,10 +1,11 @@
-const {app, ipcMain, Notification, dialog, nativeImage } = require("electron");
+const {app, ipcMain, Notification, dialog } = require("electron");
 import UpdateWindow from './services/update/update-window';
 import MainWindow from './services/main/main-window';
-const fs = require('fs');
+import mainImages from './services/library/MainImages';
 const path = require("path");
 const promiseIpc =  require('electron-promise-ipc');
 const log = require('electron-log');
+const fs = require('fs');
 
 
 ipcMain.on('notify', (_, message)=>{
@@ -23,53 +24,33 @@ promiseIpc.on('setAvatar', (_)=>{
             console.log("No file selected!")
         } else {
             const filePath = result.filePaths[0];
-            const fileName = path.basename(filePath);
-            const imgFolderPath = path.join(app.getPath('userData'), fileName);
-            fs.copyFile(filePath, imgFolderPath, (err) => {
-                if (err) throw err;
-                log.info(fileName + ' uploaded.');
-                MainWindow.getMainWindow().webContents.send('avatarChanged', fileName);
-                /* setTimeout((e) => {
-                    electronImageResize({
-                        url: imgFolderPath,
-                        width: 512,
-                        height: 512
-                      }).then(img => {
-                        console.log('AFTER RESIZE', imgFolderPath);
-                        // save it as a png file
-                        writeFileSync(imgFolderPath, img.toJpeg());
-                      })
-                }), 1000; */
-            });
+            //const fileName = path.basename(filePath);
+            const destination = path.join(app.getPath('userData'), 'avatar.jpg');
+            
+            console.log(filePath);
+            console.log(destination);
+            mainImages.resizeImage(filePath, destination, 'avatar');
         }
     });
-    
 })
 
+promiseIpc.on('isAvatarExist', (_) => {
+     const file = path.join(app.getPath('userData'), 'avatar.jpg');
+   return (fs.existsSync(file)) ? true: false;
+    /* fs.access(file, (err) => {
+        if (err) {
+            console.log('AVATAR NOT EXITS');
+            return false;
+        } else {
+            console.log('AVATAR EXITS');
+            return true;
+        }
+    }) */
+})
 
-const resizeImage = (filePath) =>{
-    //thumb: 640 480
-    // hd: 1280 960
-    // fhd: 1920 1440
-    const img = nativeImage.createFromPath(filePath);
-    const imgSize = img.getSize();
-    const imgW = imgSize.width;
-    const imgH = imgSize.height;
-    // image carrée
-    if(imgW === imgH){
-
-    }
-
-    // image horizontale
-    if(imgW > imgH){
-
-    }
-
-    // image Verticale
-    if(imgW < imgH){
-
-    }
-}
+promiseIpc.on('getAvatar', (_)=> {
+    mainImages.getAvatar(path.join(app.getPath('userData'), 'avatar.jpg'));
+})
 
 promiseIpc.on('getUserDataPath', (_)=>{
     return  app.getPath('userData');

@@ -14,7 +14,8 @@ import {UserContext} from "../../contexts/UserContext";
 const Parameters = (props) => {
     const {appParams, setAppParams} = useContext(AppParamsContext);
     const {licence, setLicence} = useContext(LicenceContext);
-    const{ user, setUser} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
+    const [switchVisible, setSwitchVisible] = useState('d-none');
 
     const changeLanguage = (e) => {
         setLanguage(e.target.value);
@@ -28,7 +29,7 @@ const Parameters = (props) => {
     const t = useTranslation();
 
     useEffect(() => {
-        console.log(appParams.application);
+        //console.log(appParams.application);
     }, [])
 
     const changeUserInfos = (e) => {
@@ -62,9 +63,28 @@ const Parameters = (props) => {
         });
     }
 
+    const unsetAvatar = (e) => {
+        let params = {...appParams};
+        params.user.avatar = !params.user.avatar;
+        ManageParameters.setParameters(appParams.system.root_path ,[{node: "user.avatar", value: params.user.avatar}]).then(parameters =>{
+            setAppParams(params);
+            log.info( 'Avatar set to ' + params.user.avatar);
+        });
+        
+    }
+
     useEffect(()=>{
+        promiseIpc.send('isAvatarExist').then((avatarExists) => {
+            setSwitchVisible(avatarExists ? '': 'd-none');
+            //console.log('AVATAR EXISTS', avatarExists);
+        });
+
         ipcRenderer.on('avatarChanged', (event, arg) => {
-            console.log("VUE", arg);
+            let params = {...appParams};
+            params.user.avatar = arg;
+            params.user.avatar_changed = arg;
+            setAppParams(params);
+            setSwitchVisible(arg ? '': 'd-none');
         });
     }, []);
 
@@ -125,10 +145,16 @@ const Parameters = (props) => {
                                         <input type="text" className="form-control form-control-sm" onChange={changeUserInfos} value={user.email} id="email" placeholder="" disabled/>
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <div className="form-group col">
+                                <div className="row mt-3">
+                                    <div className="form-group col-md-6">
                                         <button className="btn-secondary" onClick={changeAvatar}><i className="fas fa-user mr-2"></i>Avatar</button>
                                     </div>
+                                    <div className="col-md-6">
+                                            <div className={`custom-control custom-switch ${switchVisible}`}>
+                                                <input name="avatar" type="checkbox" checked={appParams.user.avatar} onChange={unsetAvatar} className="custom-control-input" id="avatarSwitch"/>
+                                                <label className="custom-control-label" htmlFor="avatarSwitch">Avatar actif</label>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </form>

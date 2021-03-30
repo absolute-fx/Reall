@@ -19,30 +19,58 @@ const Navigation = (props) => {
     const mainNavData = mainNavItems;
     const secondaryNavData = secondaryNavItems;
 
+    const [active, setToggle] = useState("");
+    const [avatar, setAvatar] = useState(false);
+    const [avatarImg, setAvatarImg] = useState(<img src="src/renderer/images/user_avatar.jpg" className="img-thumbnail rounded-circle avatar" alt="avatar"/>);
+    const [avatarChanged, setAvatarChanged] = useState(false);
+
     const saveParams = async (isToglled) =>{
-        //await electron.parametersApi.setAppParams([{node: "navToggled", value: isToglled}]);
         let userDataPath;
         promiseIpc.send('getUserDataPath').then(data =>{
             userDataPath = data;
             ManageParameters.setParameters(userDataPath ,[{node: "navToggled", value: isToglled}]).then(parameters =>{
-                //resolve(parameters);
                 console.log('SAVED');
             });
         });
     };
 
-    const [active, setToggle] = useState("");
     const toggleNav = () => {
         const isToglled = active === "" ? true: false;
         setAppParams({...appParams, "navToggled": isToglled});
-        saveParams(isToglled)
+        saveParams(isToglled);
     }
 
     useEffect(() => {
         if(appParams){
             setToggle(appParams.navToggled ? 'active': '');
+            setAvatar(appParams.user.avatar ? appParams.user.avatar : false );
+            if (typeof appParams.user.avatar_changed != 'undefined'){
+                if(appParams.user.avatar_changed){
+                    console.log(appParams.user.avatar_changed);
+                    setAvatarChanged(true);
+                }
+            }
         }
     }), [appParams];
+
+    useEffect(() => {
+        if(avatar){
+            setAvatarImg(<img src={appParams.system.root_path + '\\avatar.jpg?' + new Date().getTime()} className="img-thumbnail rounded-circle avatar" alt="avatar"/>);
+        }else{
+            setAvatarImg(<img src="src/renderer/images/user_avatar.jpg" className="img-thumbnail rounded-circle avatar" alt="avatar"/>);
+        }
+    }, [avatar]);
+
+    useEffect(() => {
+        if(avatarChanged){
+            console.log('RELOAD AVATAR');
+            if(avatar){
+                setAvatarImg(<img src={appParams.system.root_path + '\\avatar.jpg?' + new Date().getTime()} className="img-thumbnail rounded-circle avatar" alt="avatar"/>);
+            }
+        }
+        setAvatarChanged(false);
+    }, [avatarChanged])
+  
 
     const t = useTranslation();
 
@@ -60,9 +88,7 @@ const Navigation = (props) => {
                 <div className="user-box">
                     <div className="row side-user-max">
                         <div className="col-md-4">
-                            <img src={`src/renderer/images/user_avatar.jpg`}
-                                 className="img-thumbnail rounded-circle avatar"
-                                 alt="avatar"/>
+                            {avatarImg}
                         </div>
                         <div className="col-md-8 box-user-data">
                             <strong>{userName}</strong>
@@ -70,9 +96,7 @@ const Navigation = (props) => {
                         </div>
                     </div>
                     <div className="row side-user-min">
-                        <img src={`src/renderer/images/user_avatar.jpg`}
-                             className="img-thumbnail rounded-circle avatar"
-                             alt="avatar"/>
+                        {avatarImg}
                     </div>
                 </div>
                 <ul className="list-unstyled components">
