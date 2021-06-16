@@ -48,5 +48,9 @@
     "dark": "Donker",
     "light": "Licht",
     "language": "Taal"
+  },
+  "clients":{
+    "title": "Clienten",
+    "search": "ZOEKEN"
   }
 }

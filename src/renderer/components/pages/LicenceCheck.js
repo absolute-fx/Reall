@@ -70,8 +70,8 @@ const LicenceCheck = () => {
                     licence_type: "Full", 
                     company_holder: "AfxLab", 
                     end_date: "2021-06-10 00:00:00", 
-                    api_link: "https://imoges-api.herokuapp.com/api/"}
-                    //api_link: "http://127.0.0.1:4000/api/"}
+                    //api_link: "https://imoges-api.herokuapp.com/api/"}
+                    api_link: "http://127.0.0.1:4000/api/"}
                 );
                 setFooterLoader({active: false, message: '', icon:''});
                 history.push("/params");

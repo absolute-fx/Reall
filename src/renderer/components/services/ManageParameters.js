@@ -27,6 +27,7 @@ class ManageParameters{
                         reject(err);
                     } else {
                         appParameters = JSON.parse(data);
+                        //console.log(ManageParameters.difference(appParameters, ManageParameters.getDefaultParams()));
                         resolve(appParameters);
                         //console.log(appParameters);
                     }
@@ -122,6 +123,9 @@ class ManageParameters{
         return appParameters;
     }
 
+    static isEqual(local, ogiginal) {
+      //console.log('COMPARE', compare.equalByStructure(local, ogiginal));
+    }
 }
 
 module.exports = ManageParameters;

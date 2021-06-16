@@ -63,7 +63,6 @@ const Navigation = (props) => {
 
     useEffect(() => {
         if(avatarChanged){
-            console.log('RELOAD AVATAR');
             if(avatar){
                 setAvatarImg(<img src={appParams.system.root_path + '\\avatar.jpg?' + new Date().getTime()} className="img-thumbnail rounded-circle avatar" alt="avatar"/>);
             }

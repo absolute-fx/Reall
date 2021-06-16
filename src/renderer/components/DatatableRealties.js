@@ -3,8 +3,8 @@ import React from 'react';
 const DatatableRealties = ({onRealtySelected, realties}) => {
 	
 	const contractType = ['Location', 'Vente'];
-    const getRealtyPage = (realty) =>{
-        onRealtySelected(realty);
+    const getRealtyPage = (realty, index) =>{
+        onRealtySelected(realty, index);
     }
 
 	const isAquired = (status) => {
@@ -36,7 +36,7 @@ const DatatableRealties = ({onRealtySelected, realties}) => {
             </thead>
             <tbody>
                 {realties.map((realty, index) => (
-                    <tr key={index} onClick={() => getRealtyPage(relaty)}>
+                    <tr key={index} onClick={() => getRealtyPage(realty, index)}>
                         <td>{realty.realty_title}</td>
                         <td>{realty.realty_net_price} €</td>
                         <td>{realty.realty_surface} m²</td>

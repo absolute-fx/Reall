@@ -48,5 +48,9 @@
     "dark": "Foncé",
     "light": "Clair",
     "language": "Langue"
+  },
+  "clients":{
+    "title": "Clients",
+    "search": "RECHERCHE"
   }
 }

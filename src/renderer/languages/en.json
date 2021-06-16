@@ -48,5 +48,8 @@
     "dark": "Dark",
     "light": "Light",
     "language": "Language"
+  },
+  "clients":{
+    "title": "Clients"
   }
 }

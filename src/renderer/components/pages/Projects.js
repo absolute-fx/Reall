@@ -147,7 +147,7 @@ const Projects = (props) => {
 				map: projectMap
 			})
 
-			console.log(project.realties);
+			//console.log(project.realties);
 		}
 	}, [project]);
 
@@ -175,6 +175,11 @@ const Projects = (props) => {
 		document.getElementById('project').classList.add("d-none");
 		$("#projects").hide().fadeIn(200);
 		setPanelHeight();
+	}
+
+	const onProjectChanged = (data)=>{
+		console.log('PROJECT CHANGED', data)
+		setProject(data);
 	}
 
     function search(projects){
@@ -230,7 +235,7 @@ const Projects = (props) => {
                 </div>
 			</div>
 			<div id="project" className="d-none">
-				<Project backFromProject={backFromProject} project={project}/>
+				<Project backFromProject={backFromProject} project={project} onProjectChanged={onProjectChanged}/>
 			</div>
         </>
     )
