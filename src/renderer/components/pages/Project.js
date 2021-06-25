@@ -120,7 +120,7 @@ const Project = (props) => {
 									</header>
 									<div className="panel-separator" />
 									<div className="panel-content">
-										<DatatableRealties onRealtySelected={onRealtySelected} realties={search(project.realties)}/>
+										<DatatableRealties onRealtySelected={onRealtySelected} realties={search(realties)}/>
 									</div>
 								</div>
 							</div>
