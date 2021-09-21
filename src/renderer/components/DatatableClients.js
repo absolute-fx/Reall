@@ -1,8 +1,8 @@
 import React from 'react';
 
-const DatatableClients = ({onCkientSelected, clients}) => {
+const DatatableClients = ({onClientSelected, clients}) => {
     const getClientPage = (client, index) =>{
-        onCkientSelected(client, index);
+      onClientSelected(client, index);
     }
 
     return (

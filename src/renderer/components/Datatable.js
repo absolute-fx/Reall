@@ -17,8 +17,8 @@ const Datatable = ({onProjectSelected, projects}) => {
         return percent;
     }
 
-    const getProjectPage = (project) =>{
-        onProjectSelected(project);
+    const getProjectPage = (project, index) =>{
+        onProjectSelected(project, index);
     }
 
     return (
@@ -32,7 +32,7 @@ const Datatable = ({onProjectSelected, projects}) => {
             </thead>
             <tbody>
                 {projects.map((project, index) => (
-                    <tr key={index} onClick={() => getProjectPage(project)}>
+                    <tr key={index} onClick={() => getProjectPage(project, index)}>
                         <td>{project.project_title}</td>
                         <td>{getPercentSold(project.realties)}</td>
                         <td className="text-center">
