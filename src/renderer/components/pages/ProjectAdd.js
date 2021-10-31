@@ -189,7 +189,7 @@ const ProjectAdd = (props) => {
               <div className="row form-separator">
                 <div className="form-group col-md-12">
                   <label htmlFor="	project_long_description">Description</label>
-                  <textarea name={"project_long_	project_long_description"} value={project.project_long_description || ""} onBlur={onBlur} onChange={(event) => onChange(event)} className="form-control" id="description" rows="3" />
+                  <textarea name={"project_long_description"} value={project.project_long_description || ""} onBlur={onBlur} onChange={(event) => onChange(event)} className="form-control" id="description" rows="3" />
                 </div>
               </div>
               <div className="row">
@@ -226,7 +226,7 @@ const ProjectAdd = (props) => {
               <div className="row mt-2">
                 <div className="col-md-4 form-group">
                   <div id="dark-mode-switch" className="custom-control custom-switch m-auto">
-                    <input name="project_handicapped_access" checked={project.project_handicapped_access === 1} onChange={(event) => onChangeCheckbox(event)} type="checkbox"  className="custom-control-input" id="handicappedSwitch"/>
+                    <input name="project_handicapped_access" onChange={(event) => onChangeCheckbox(event)} type="checkbox"  className="custom-control-input" id="handicappedSwitch"/>
                     <label className="custom-control-label" htmlFor="handicappedSwitch">Accès handicapé</label>
                   </div>
                 </div>
